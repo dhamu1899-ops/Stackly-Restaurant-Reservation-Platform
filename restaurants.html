@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fine Dining & Michelin Reservations | Stackly Catalog</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Cormorant Garamond', 'Georgia', 'serif'],
+            display: ['Cinzel', 'serif'],
+            sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"></script>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-[#0b0c10] text-[#f3f4f6] antialiased selection:bg-amber-400 selection:text-black min-h-screen flex flex-col pb-24">
+
+  <!-- Mount Navbar Header -->
+  <div id="navbar-mount"></div>
+
+  <main class="flex-1 w-full">
+    
+    <!-- 1. HEADER BANNER WITH CITY SELECTOR CHIPS -->
+    <div class="border-b border-[#1f2230] bg-[#0f1118]/80 py-12 px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div>
+            <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-amber-400 mb-1">
+              <svg viewBox="398 82 212 290" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0"><path fill="#fcd34d" d="M419.713867,256.179962 C408.001251,235.739304 410.215973,215.613876 419.889709,195.679504 C426.373138,182.319229 436.255493,171.444672 446.508270,160.904480 C457.075165,150.041229 468.783997,140.348602 478.792694,128.896606 C487.411407,119.035004 494.797852,108.464394 500.031921,96.425682 C500.738983,94.799370 501.001617,92.854477 502.785980,91.712807 C503.214905,91.838028 503.879059,91.821617 504.103485,92.127670 C514.526489,106.341171 522.003967,121.483376 518.287415,139.859406 C515.933533,151.498276 508.987885,160.308563 500.296600,167.942245 C487.788574,178.928223 473.634369,187.949692 462.046570,200.037262 C456.219025,206.116135 451.191589,212.659836 449.149933,221.054688 C445.376373,236.570572 454.272034,249.198563 470.197021,250.779221 C485.241028,252.272446 499.302216,248.880798 512.632202,241.996979 C514.021362,241.279602 515.213196,239.793518 517.062500,240.547546 C517.833252,242.063324 516.690857,242.794266 515.917847,243.562866 C502.480865,256.923462 487.519073,267.973206 468.591339,271.949402 C447.923096,276.291199 431.269562,272.383606 419.713867,256.179962 z"/><path fill="#fcd34d" d="M536.351807,311.352905 C521.089722,325.623138 508.631836,341.451172 501.644409,361.304535 C500.580017,360.856842 499.799347,360.777496 499.458496,360.348633 C491.323975,350.113098 485.458466,338.909088 484.707672,325.531189 C484.034546,313.536499 489.236786,303.909576 496.947052,295.363251 C506.737030,284.511749 519.089050,276.702271 530.329102,267.573334 C539.676453,259.981689 548.930542,252.352356 553.649658,240.719803 C556.247925,234.315125 556.803040,227.722214 555.167542,221.122284 C551.964783,208.197189 539.399353,200.886032 526.174622,203.877502 C513.911682,206.651428 503.242737,212.702515 493.079834,219.823700 C492.039246,220.552856 491.267578,221.851700 489.661957,221.557190 C488.659760,220.289383 489.653076,219.345703 490.287292,218.480408 C503.850159,199.976334 521.506714,187.674316 544.321167,183.636948 C574.742554,178.253418 599.437622,199.883118 594.804749,234.346802 C592.539368,251.198425 583.628967,264.794067 572.581299,277.156372 C561.558105,289.491241 548.610413,299.803345 536.351807,311.352905 z"/></svg>
+              <span>Stackly Reserve Gastronomy Directory</span>
+            </div>
+            <h1 class="font-display text-3xl sm:text-4xl font-bold text-white tracking-wide">
+              Fine Dining & Michelin Reservations
+            </h1>
+            <p class="text-sm text-[#8c8f9f] mt-1">
+              Securing rare tables across New York, Tokyo, Amalfi, Stockholm, Dubai, and Bordeaux.
+            </p>
+          </div>
+
+          <!-- City Selector Chips -->
+          <div id="city-chips-container" class="flex flex-wrap items-center gap-1.5 max-w-2xl">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. CHEF'S 24-HOUR URGENT TABLE ALLOCATIONS -->
+    <div class="border-b border-[#1c1d29] bg-[#10121d] py-6 px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center gap-2">
+            <i data-lucide="flame" class="h-4 w-4 text-amber-400"></i>
+            <h3 class="font-display text-xs font-bold uppercase tracking-[0.2em] text-white">
+              Chef's 24-Hour Urgent Table Allocations
+            </h3>
+          </div>
+          <span class="text-xs text-amber-400 font-mono hidden sm:inline">Priority Member Instant Claim</span>
+        </div>
+
+        <div id="urgent-drops-container" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. STICKY SEARCH & FILTER CONTROL BAR -->
+    <div class="sticky top-[104px] z-30 border-b border-[#1f2230] bg-[#0c0d13]/95 backdrop-blur-xl px-4 sm:px-6 lg:px-8 py-3">
+      <div class="mx-auto max-w-7xl flex flex-wrap lg:flex-nowrap items-center justify-between gap-3">
+        
+        <!-- Search Input -->
+        <div class="relative flex-1 min-w-[220px]">
+          <i data-lucide="search" class="absolute left-3.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-[#71717a]"></i>
+          <input type="text" id="filter-search" oninput="applyCatalogFilters()" placeholder="Search restaurant, chef, cuisine, or neighborhood..." class="w-full rounded-xl border border-[#272a3b] bg-[#141622] pl-9 pr-8 py-2 text-xs text-white placeholder-[#71717a] focus:border-amber-400 focus:outline-none" />
+        </div>
+
+        <!-- Filter Dropdowns -->
+        <div class="flex flex-wrap sm:flex-nowrap items-center gap-2 text-xs">
+          
+          <!-- Michelin Stars -->
+          <select id="filter-michelin" onchange="applyCatalogFilters()" class="rounded-xl border border-[#272a3b] bg-[#141622] px-2.5 py-2 text-white focus:border-amber-400 focus:outline-none cursor-pointer whitespace-nowrap">
+            <option value="all">All Michelin Stars</option>
+            <option value="3">⭐️⭐️⭐️ 3 Stars</option>
+            <option value="2">⭐️⭐️ 2 Stars</option>
+            <option value="starred">All Starred</option>
+          </select>
+
+          <!-- Cuisine -->
+          <select id="filter-cuisine" onchange="applyCatalogFilters()" class="rounded-xl border border-[#272a3b] bg-[#141622] px-2.5 py-2 text-white focus:border-amber-400 focus:outline-none cursor-pointer max-w-[140px] truncate">
+            <option value="all">All Cuisines</option>
+            <option value="Modern French">Modern French</option>
+            <option value="Edomae Omakase">Edomae Omakase</option>
+            <option value="Coastal Italian">Coastal Italian</option>
+            <option value="Modern Nordic">Modern Nordic</option>
+            <option value="Basque Wood-Fire">Basque Wood-Fire</option>
+          </select>
+
+          <!-- Price Tier -->
+          <select id="filter-price" onchange="applyCatalogFilters()" class="rounded-xl border border-[#272a3b] bg-[#141622] px-2.5 py-2 text-white focus:border-amber-400 focus:outline-none cursor-pointer whitespace-nowrap">
+            <option value="all">All Prices</option>
+            <option value="$$$$">$$$$ (Ultra $300+)</option>
+            <option value="$$$">$$$ (Fine $200+)</option>
+          </select>
+
+          <!-- Sort Order -->
+          <select id="filter-sort" onchange="applyCatalogFilters()" class="rounded-xl border border-[#272a3b] bg-[#141622] px-2.5 py-2 text-white focus:border-amber-400 focus:outline-none cursor-pointer whitespace-nowrap">
+            <option value="recommended">Recommended</option>
+            <option value="stars">Top Michelin Stars</option>
+            <option value="rating">Diner Rating</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="price-asc">Price: Low to High</option>
+          </select>
+
+          <!-- Reset Button -->
+          <button onclick="resetCatalogFilters()" title="Reset all filters" class="flex items-center justify-center h-8 w-8 rounded-xl border border-[#272a3b] bg-[#141622] text-[#8c8f9f] hover:text-white shrink-0 cursor-pointer">
+            <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+          </button>
+
+        </div>
+
+        <!-- View Mode Switcher -->
+        <div class="flex items-center gap-1.5 shrink-0">
+          <div class="flex items-center rounded-xl border border-[#272a3b] bg-[#141622] p-1 text-xs">
+            <button onclick="setCatalogViewMode('grid')" id="view-mode-grid" class="flex h-7 w-7 items-center justify-center rounded-lg bg-amber-400 text-black font-bold cursor-pointer">
+              <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+            </button>
+            <button onclick="setCatalogViewMode('list')" id="view-mode-list" class="flex h-7 w-7 items-center justify-center rounded-lg text-[#8c8f9f] hover:text-white cursor-pointer">
+              <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" x2="21" y1="6" y2="6"/><line x1="8" x2="21" y1="12" y2="12"/><line x1="8" x2="21" y1="18" y2="18"/><line x1="3" x2="3.01" y1="6" y2="6"/><line x1="3" x2="3.01" y1="12" y2="12"/><line x1="3" x2="3.01" y1="18" y2="18"/></svg>
+            </button>
+            <button onclick="setCatalogViewMode('map')" id="view-mode-map" class="flex h-7 w-7 items-center justify-center rounded-lg text-[#8c8f9f] hover:text-white cursor-pointer">
+              <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" x2="9" y1="3" y2="18"/><line x1="15" x2="15" y1="6" y2="21"/></svg>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 4. RESULTS SECTION -->
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-8">
+      
+      <!-- Results Count & Active Tags -->
+      <div class="flex items-center justify-between pb-4 border-b border-[#1c1d29] text-xs text-[#8c8f9f] mb-8">
+        <span id="catalog-count-label">Found 6 premier dining allocations</span>
+
+        <div id="active-filter-tags" class="flex items-center gap-2">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <!-- GRID / LIST / MAP CONTAINER -->
+      <div id="catalog-view-container">
+        <!-- Rendered by JS -->
+      </div>
+
+    </div>
+
+    <!-- 5. STACKLY VERIFIED DINING STANDARDS -->
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-20">
+      <div class="rounded-3xl border border-[#222536] bg-[#10121d] p-8 sm:p-12 shadow-xl">
+        <div class="max-w-2xl mb-8">
+          <span class="font-mono text-xs text-amber-400 uppercase font-bold">Stackly Guarantee</span>
+          <h3 class="font-display text-2xl sm:text-3xl font-bold text-white mt-1">
+            Stackly Verified Dining Standards & Corkage Protocol
+          </h3>
+          <p class="text-xs text-[#8c8f9f] mt-2 leading-relaxed">
+            Every restaurant represented on Stackly agrees to our global hospitality charter, ensuring effortless entry and pristine dining experiences.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <div class="space-y-2">
+            <div class="flex items-center gap-2 text-amber-300 font-bold text-sm">
+              <i data-lucide="shield-check" class="h-4 w-4 text-amber-400"></i>
+              <span>Zero Wait Policy</span>
+            </div>
+            <p class="text-xs text-[#8c8f9f] leading-relaxed">
+              Your table is pre-cleared and waiting precisely at your reservation time. No waiting at the bar or holding line.
+            </p>
+          </div>
+
+          <div class="space-y-2">
+            <div class="flex items-center gap-2 text-amber-300 font-bold text-sm">
+              <i data-lucide="wine" class="h-4 w-4 text-amber-400"></i>
+              <span>Sommelier Pre-Decanting</span>
+            </div>
+            <p class="text-xs text-[#8c8f9f] leading-relaxed">
+              Add rare wine pairings or vintage selections in advance; the sommelier will prepare proper glassware and aeration.
+            </p>
+          </div>
+
+          <div class="space-y-2">
+            <div class="flex items-center gap-2 text-amber-300 font-bold text-sm">
+              <i data-lucide="award" class="h-4 w-4 text-amber-400"></i>
+              <span>Proprietor Verification</span>
+            </div>
+            <p class="text-xs text-[#8c8f9f] leading-relaxed">
+              All restaurant listings are audited in person by Stackly gastronomy inspectors to ensure culinary excellence.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Mount Footer -->
+  <div id="footer-mount"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/pages/restaurants.js"></script>
+</body>
+</html>

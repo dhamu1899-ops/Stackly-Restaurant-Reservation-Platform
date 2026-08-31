@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VIP Member Sign In | Stackly Reserve</title>
+  <meta name="description" content="Sign in to your Stackly Reserve private dining account to access Michelin table allotments and the Maître D' operations console." />
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Cormorant Garamond', 'Georgia', 'serif'],
+            display: ['Cinzel', 'serif'],
+            sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-[#090a0f] text-[#f3f4f6] antialiased selection:bg-amber-400 selection:text-black min-h-screen flex flex-col justify-between relative overflow-x-hidden">
+
+  <!-- Ambient Background Glow -->
+  <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-amber-500/10 rounded-full blur-[140px]"></div>
+    <div class="absolute bottom-10 right-10 w-96 h-96 bg-amber-700/5 rounded-full blur-[100px]"></div>
+  </div>
+
+  <!-- 1. DEDICATED AUTH TOP BAR -->
+  <header class="relative z-20 border-b border-[#1c1f2e] bg-[#0d0e15]/90 backdrop-blur-md px-4 sm:px-8 py-4">
+    <div class="mx-auto max-w-7xl flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2.5 group" id="login-brand-logo">
+        <svg viewBox="398 82 212 290" xmlns="http://www.w3.org/2000/svg" class="h-9 w-9 shrink-0 transition-transform duration-300 group-hover:scale-105 filter drop-shadow-[0_0_12px_rgba(252,211,77,0.3)]"><path fill="#fcd34d" d="M419.713867,256.179962 C408.001251,235.739304 410.215973,215.613876 419.889709,195.679504 C426.373138,182.319229 436.255493,171.444672 446.508270,160.904480 C457.075165,150.041229 468.783997,140.348602 478.792694,128.896606 C487.411407,119.035004 494.797852,108.464394 500.031921,96.425682 C500.738983,94.799370 501.001617,92.854477 502.785980,91.712807 C503.214905,91.838028 503.879059,91.821617 504.103485,92.127670 C514.526489,106.341171 522.003967,121.483376 518.287415,139.859406 C515.933533,151.498276 508.987885,160.308563 500.296600,167.942245 C487.788574,178.928223 473.634369,187.949692 462.046570,200.037262 C456.219025,206.116135 451.191589,212.659836 449.149933,221.054688 C445.376373,236.570572 454.272034,249.198563 470.197021,250.779221 C485.241028,252.272446 499.302216,248.880798 512.632202,241.996979 C514.021362,241.279602 515.213196,239.793518 517.062500,240.547546 C517.833252,242.063324 516.690857,242.794266 515.917847,243.562866 C502.480865,256.923462 487.519073,267.973206 468.591339,271.949402 C447.923096,276.291199 431.269562,272.383606 419.713867,256.179962 z"/><path fill="#fcd34d" d="M536.351807,311.352905 C521.089722,325.623138 508.631836,341.451172 501.644409,361.304535 C500.580017,360.856842 499.799347,360.777496 499.458496,360.348633 C491.323975,350.113098 485.458466,338.909088 484.707672,325.531189 C484.034546,313.536499 489.236786,303.909576 496.947052,295.363251 C506.737030,284.511749 519.089050,276.702271 530.329102,267.573334 C539.676453,259.981689 548.930542,252.352356 553.649658,240.719803 C556.247925,234.315125 556.803040,227.722214 555.167542,221.122284 C551.964783,208.197189 539.399353,200.886032 526.174622,203.877502 C513.911682,206.651428 503.242737,212.702515 493.079834,219.823700 C492.039246,220.552856 491.267578,221.851700 489.661957,221.557190 C488.659760,220.289383 489.653076,219.345703 490.287292,218.480408 C503.850159,199.976334 521.506714,187.674316 544.321167,183.636948 C574.742554,178.253418 599.437622,199.883118 594.804749,234.346802 C592.539368,251.198425 583.628967,264.794067 572.581299,277.156372 C561.558105,289.491241 548.610413,299.803345 536.351807,311.352905 z"/></svg>
+        <div class="flex flex-col text-left">
+          <span class="font-display tracking-[0.2em] text-base font-bold text-white group-hover:text-amber-300 transition-colors">STACKLY</span>
+          <span class="text-[9px] uppercase tracking-[0.2em] text-amber-400 font-semibold">Private Reserve</span>
+        </div>
+      </a>
+
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="flex items-center gap-1.5 rounded-xl border border-[#2b2e40] bg-[#141624] px-3.5 py-1.5 text-xs font-semibold text-[#a1a1aa] hover:text-white hover:border-amber-400/40 transition-all">
+          <i data-lucide="home" class="h-3.5 w-3.5 text-amber-400"></i>
+          <span>Back to Home</span>
+        </a>
+        <a href="concierge.html" class="hidden sm:flex items-center gap-1.5 rounded-xl bg-[#141624] border border-[#272a38] px-3.5 py-1.5 text-xs font-medium text-[#71717a] hover:text-white transition-colors">
+          <i data-lucide="help-circle" class="h-3.5 w-3.5"></i>
+          <span>Need Concierge Help?</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. AUTHENTICATION CONTAINER -->
+  <main class="relative z-10 flex-1 flex items-center justify-center px-4 py-12">
+    <div class="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+
+      <!-- Left Side: Luxury Brand Narrative Card -->
+      <div class="lg:col-span-5 rounded-3xl border border-[#272a3b] bg-gradient-to-b from-[#141622] via-[#0f1118] to-[#0c0d12] p-8 flex flex-col justify-between relative overflow-hidden shadow-2xl">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
+
+        <div class="space-y-6 relative z-10">
+          <div class="flex items-center gap-3">
+            <svg viewBox="398 82 212 290" xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 shrink-0 transition-transform duration-300 group-hover:scale-105 filter drop-shadow-[0_0_12px_rgba(252,211,77,0.3)]"><path fill="#fcd34d" d="M419.713867,256.179962 C408.001251,235.739304 410.215973,215.613876 419.889709,195.679504 C426.373138,182.319229 436.255493,171.444672 446.508270,160.904480 C457.075165,150.041229 468.783997,140.348602 478.792694,128.896606 C487.411407,119.035004 494.797852,108.464394 500.031921,96.425682 C500.738983,94.799370 501.001617,92.854477 502.785980,91.712807 C503.214905,91.838028 503.879059,91.821617 504.103485,92.127670 C514.526489,106.341171 522.003967,121.483376 518.287415,139.859406 C515.933533,151.498276 508.987885,160.308563 500.296600,167.942245 C487.788574,178.928223 473.634369,187.949692 462.046570,200.037262 C456.219025,206.116135 451.191589,212.659836 449.149933,221.054688 C445.376373,236.570572 454.272034,249.198563 470.197021,250.779221 C485.241028,252.272446 499.302216,248.880798 512.632202,241.996979 C514.021362,241.279602 515.213196,239.793518 517.062500,240.547546 C517.833252,242.063324 516.690857,242.794266 515.917847,243.562866 C502.480865,256.923462 487.519073,267.973206 468.591339,271.949402 C447.923096,276.291199 431.269562,272.383606 419.713867,256.179962 z"/><path fill="#fcd34d" d="M536.351807,311.352905 C521.089722,325.623138 508.631836,341.451172 501.644409,361.304535 C500.580017,360.856842 499.799347,360.777496 499.458496,360.348633 C491.323975,350.113098 485.458466,338.909088 484.707672,325.531189 C484.034546,313.536499 489.236786,303.909576 496.947052,295.363251 C506.737030,284.511749 519.089050,276.702271 530.329102,267.573334 C539.676453,259.981689 548.930542,252.352356 553.649658,240.719803 C556.247925,234.315125 556.803040,227.722214 555.167542,221.122284 C551.964783,208.197189 539.399353,200.886032 526.174622,203.877502 C513.911682,206.651428 503.242737,212.702515 493.079834,219.823700 C492.039246,220.552856 491.267578,221.851700 489.661957,221.557190 C488.659760,220.289383 489.653076,219.345703 490.287292,218.480408 C503.850159,199.976334 521.506714,187.674316 544.321167,183.636948 C574.742554,178.253418 599.437622,199.883118 594.804749,234.346802 C592.539368,251.198425 583.628967,264.794067 572.581299,277.156372 C561.558105,289.491241 548.610413,299.803345 536.351807,311.352905 z"/></svg>
+            <div>
+              <span class="font-display tracking-[0.2em] text-lg font-bold text-white block">STACKLY RESERVE</span>
+              <span class="text-[10px] uppercase tracking-[0.25em] text-amber-400 font-medium">Secured Access Portal</span>
+            </div>
+          </div>
+
+          <div class="pt-2 space-y-3">
+            <h2 class="font-display text-2xl sm:text-3xl font-bold text-white leading-snug">
+              Welcome to <br />
+              <span class="gold-gradient-text">Exceptional Gastronomy</span>
+            </h2>
+            <p class="text-xs sm:text-sm text-[#a1a1aa] font-light leading-relaxed">
+              Sign in with your verified credentials to access your private Michelin table allotments or enter the Maître D' operations console.
+            </p>
+          </div>
+
+          <!-- Privilege Highlights -->
+          <div class="pt-3 space-y-3 border-t border-[#222534]">
+            <div class="flex items-start gap-3 text-xs text-[#d4d4d8]">
+              <i data-lucide="shield-check" class="h-4 w-4 text-amber-400 shrink-0 mt-0.5"></i>
+              <span>Direct proprietor table allocations with cryptographic NFC dining passes.</span>
+            </div>
+            <div class="flex items-start gap-3 text-xs text-[#d4d4d8]">
+              <i data-lucide="crown" class="h-4 w-4 text-amber-400 shrink-0 mt-0.5"></i>
+              <span>Subterranean Grand Cru cellar coordination &amp; decanting notes.</span>
+            </div>
+            <div class="flex items-start gap-3 text-xs text-[#d4d4d8]">
+              <i data-lucide="chef-hat" class="h-4 w-4 text-amber-400 shrink-0 mt-0.5"></i>
+              <span>Real-time table turnover and floor orchestration suite for managers.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial Quote -->
+        <div class="mt-8 pt-6 border-t border-[#1f2230] relative z-10">
+          <p class="text-xs italic text-[#a1a1aa] leading-relaxed">
+            "Stackly has completely restored elegance and order to private dining bookings across our global rooms."
+          </p>
+          <div class="mt-3 flex items-center gap-3">
+            <img src="assets/asset-13.webp" alt="Chef Laurent Mercier" class="h-8 w-8 rounded-full border border-amber-500/40 object-cover" />
+            <div>
+              <span class="text-xs font-semibold text-white block">Chef Laurent Mercier</span>
+              <span class="text-[10px] text-amber-400">Executive Maître D' &amp; Operations Chairman</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Side: Authentication Form -->
+      <div class="lg:col-span-7 rounded-3xl border border-[#272a3b] bg-[#12141e]/95 p-8 sm:p-10 backdrop-blur-2xl shadow-2xl flex flex-col justify-between">
+        <div>
+          <!-- Header & Role Switcher -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#222534] pb-6">
+            <div>
+              <h1 class="font-display text-2xl font-bold text-white">Account Sign In</h1>
+              <p class="text-xs text-[#a1a1aa] mt-1">Select your account portal privilege</p>
+            </div>
+
+            <!-- Role Toggle Tabs -->
+            <div class="flex items-center rounded-2xl bg-[#0c0d12] p-1 border border-[#272a38]">
+              <button type="button" id="role-tab-client" onclick="setLoginRole('client')" class="flex items-center gap-2 rounded-xl px-3.5 py-1.5 text-xs font-medium transition-all bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-sm">
+                <i data-lucide="crown" class="h-3.5 w-3.5 text-amber-400"></i>
+                <span>VIP Client</span>
+              </button>
+              <button type="button" id="role-tab-admin" onclick="setLoginRole('admin')" class="flex items-center gap-2 rounded-xl px-3.5 py-1.5 text-xs font-medium transition-all text-[#a1a1aa] hover:text-white">
+                <i data-lucide="chef-hat" class="h-3.5 w-3.5 text-amber-400"></i>
+                <span>Admin / Maître D'</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Login Form -->
+          <form onsubmit="handleLoginSubmit(event)" class="mt-6 space-y-5">
+            <!-- Email -->
+            <div>
+              <label id="email-label" class="block text-xs font-semibold uppercase tracking-wider text-[#a1a1aa] mb-2">VIP Member Email Address</label>
+              <div class="relative">
+                <i data-lucide="mail" class="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[#71717a]"></i>
+                <input type="email" id="login-email-input" required placeholder="vip.patron@domain.com"
+                  class="w-full rounded-2xl border border-[#2b2e40] bg-[#161826] pl-11 pr-4 py-3.5 text-sm text-white placeholder-[#71717a] focus:border-amber-400 focus:outline-none transition-colors" />
+              </div>
+            </div>
+
+            <!-- Password -->
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <label class="block text-xs font-semibold uppercase tracking-wider text-[#a1a1aa]">Confidential Password</label>
+                <button type="button" id="login-forgot-passcode-btn" onclick="openForgotModal()" class="text-xs text-amber-400 hover:text-amber-300 hover:underline transition-colors cursor-pointer flex items-center gap-1">
+                  <i data-lucide="key-round" class="h-3 w-3"></i>
+                  <span>Forgot passcode?</span>
+                </button>
+              </div>
+              <div class="relative">
+                <i data-lucide="lock" class="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[#71717a]"></i>
+                <input type="password" id="login-password-input" required placeholder="Enter account passcode"
+                  class="w-full rounded-2xl border border-[#2b2e40] bg-[#161826] pl-11 pr-12 py-3.5 text-sm text-white placeholder-[#71717a] focus:border-amber-400 focus:outline-none transition-colors font-mono" />
+                <button type="button" onclick="togglePasswordVisibility()" class="absolute right-4 top-1/2 -translate-y-1/2 text-[#71717a] hover:text-white transition-colors cursor-pointer">
+                  <i id="password-eye-icon" data-lucide="eye" class="h-4 w-4"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Remember Me -->
+            <div class="flex items-center justify-between text-xs text-[#a1a1aa]">
+              <label class="flex items-center gap-2 cursor-pointer select-none">
+                <input type="checkbox" id="remember-me" checked class="h-4 w-4 rounded border-[#323648] bg-[#161826] text-amber-500 focus:ring-0 focus:ring-offset-0 cursor-pointer accent-amber-500" />
+                <span>Remember this station</span>
+              </label>
+            </div>
+
+            <!-- Submit CTA -->
+            <button type="submit" id="login-submit-btn" class="w-full mt-2 flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 py-4 text-sm font-bold text-black shadow-[0_0_25px_rgba(212,175,55,0.25)] hover:brightness-110 active:scale-[0.99] transition-all cursor-pointer">
+              <span id="login-btn-text">Enter VIP Patron Suite</span>
+              <i data-lucide="arrow-right" class="h-4 w-4"></i>
+            </button>
+          </form>
+        </div>
+
+        <!-- Bottom Switcher to Sign Up -->
+        <div class="mt-8 pt-6 border-t border-[#222534] text-center text-xs text-[#a1a1aa]">
+          <span>Do not have a private dining membership? </span>
+          <a href="signup.html" id="goto-signup-link" class="font-semibold text-amber-400 hover:text-amber-300 hover:underline transition-colors ml-1 cursor-pointer">Apply for VIP Membership</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- 3. AUTH FOOTER BAR -->
+  <footer class="relative z-10 border-t border-[#1c1f2e] bg-[#0c0d12] px-4 py-3 text-center text-[11px] text-[#71717a]">
+    <span>© <span id="footer-year"></span> Stackly Reserve Hospitality Consortium. All Rights Reserved.</span>
+  </footer>
+
+  <!-- 4. FORGOT PASSWORD MODAL -->
+  <div id="forgot-password-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="closeForgotModal()"></div>
+    <div class="relative w-full max-w-lg rounded-3xl border border-[#2c3044] bg-gradient-to-b from-[#161824] via-[#10121a] to-[#0d0e14] p-6 sm:p-8 shadow-[0_0_50px_rgba(0,0,0,0.8)] z-10 overflow-hidden">
+      <div class="pointer-events-none absolute -top-24 -right-24 w-60 h-60 bg-amber-500/15 blur-3xl rounded-full"></div>
+
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between pb-4 border-b border-[#232636]">
+        <div class="flex items-center gap-3">
+          <div class="h-10 w-10 rounded-2xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-300 shadow-sm">
+            <i data-lucide="key-round" class="h-5 w-5"></i>
+          </div>
+          <div>
+            <h3 class="font-display text-lg font-bold text-white">Vault Passcode Recovery</h3>
+            <p class="text-[11px] text-[#a1a1aa]">Encrypted Stackly credential reset protocol</p>
+          </div>
+        </div>
+        <button type="button" onclick="closeForgotModal()" class="rounded-xl border border-[#2b2e40] bg-[#141624] p-2 text-[#71717a] hover:text-white hover:border-zinc-500 transition-colors">
+          <i data-lucide="x" class="h-4 w-4"></i>
+        </button>
+      </div>
+
+      <!-- Step 1: Request -->
+      <div id="forgot-step-request">
+        <form onsubmit="handleRequestResetCode(event)" class="mt-6 space-y-5">
+          <p class="text-xs text-[#a1a1aa] leading-relaxed">
+            Enter the email address associated with your Stackly VIP Member or Maître D' account. We will dispatch a 6-digit cryptographic security code to reset your confidential passcode.
+          </p>
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-[#a1a1aa] mb-2">Registered Email Address</label>
+            <div class="relative">
+              <i data-lucide="mail" class="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[#71717a]"></i>
+              <input type="email" id="reset-email-input" required placeholder="e.g. patron@domain.com"
+                class="w-full rounded-2xl border border-[#2b2e40] bg-[#161826] pl-11 pr-4 py-3.5 text-sm text-white placeholder-[#71717a] focus:border-amber-400 focus:outline-none transition-colors" />
+            </div>
+          </div>
+          <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-3 flex items-start gap-2.5 text-xs text-amber-200/90">
+            <i data-lucide="shield-check" class="h-4 w-4 text-amber-400 shrink-0 mt-0.5"></i>
+            <span>Instant reset tokens are secured for your account safety.</span>
+          </div>
+          <div class="flex items-center justify-between gap-3 pt-2">
+            <button type="button" onclick="closeForgotModal()" class="px-4 py-3 rounded-2xl border border-[#2b2e40] text-xs font-semibold text-[#a1a1aa] hover:text-white transition-colors">Cancel</button>
+            <button type="submit" class="flex-1 flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-500 py-3 text-xs font-bold text-black hover:brightness-110 active:scale-[0.99] transition-all">
+              <span>Send Recovery Token</span>
+              <i data-lucide="arrow-right" class="h-3.5 w-3.5"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Step 2: Verify -->
+      <div id="forgot-step-verify" class="hidden">
+        <form onsubmit="handleVerifyReset(event)" class="mt-6 space-y-4">
+          <div id="reset-code-banner" class="rounded-2xl border border-emerald-500/30 bg-emerald-950/20 p-3 flex items-center justify-between text-xs text-emerald-300">
+            <div class="flex items-center gap-2">
+              <i data-lucide="check-circle-2" class="h-4 w-4 text-emerald-400 shrink-0"></i>
+              <span>Security code dispatched to <strong id="reset-email-display"></strong></span>
+            </div>
+            <span id="generated-code-display" class="font-mono font-bold text-amber-300 bg-black/40 px-2 py-0.5 rounded-lg border border-amber-500/30"></span>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-[#a1a1aa] mb-1.5">6-Digit Security Token</label>
+            <input type="text" id="recovery-code-input" required placeholder="e.g. 849201"
+              class="w-full rounded-2xl border border-[#2b2e40] bg-[#161826] px-4 py-3 text-sm text-center font-mono font-bold tracking-widest text-amber-300 placeholder-[#71717a] focus:border-amber-400 focus:outline-none transition-colors" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-[#a1a1aa] mb-1.5">New Passcode</label>
+            <div class="relative">
+              <i data-lucide="lock" class="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[#71717a]"></i>
+              <input type="password" id="new-password-input" required placeholder="At least 6 characters"
+                class="w-full rounded-2xl border border-[#2b2e40] bg-[#161826] pl-11 pr-4 py-3 text-sm text-white placeholder-[#71717a] focus:border-amber-400 focus:outline-none transition-colors font-mono" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-[#a1a1aa] mb-1.5">Confirm New Passcode</label>
+            <div class="relative">
+              <i data-lucide="lock" class="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[#71717a]"></i>
+              <input type="password" id="confirm-password-input" required placeholder="Re-enter passcode"
+                class="w-full rounded-2xl border border-[#2b2e40] bg-[#161826] pl-11 pr-4 py-3 text-sm text-white placeholder-[#71717a] focus:border-amber-400 focus:outline-none transition-colors font-mono" />
+            </div>
+          </div>
+          <div class="flex items-center justify-between gap-3 pt-3">
+            <button type="button" onclick="showForgotStep('request')" class="px-4 py-3 rounded-2xl border border-[#2b2e40] text-xs font-semibold text-[#a1a1aa] hover:text-white transition-colors">Back</button>
+            <button type="submit" class="flex-1 flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-500 py-3 text-xs font-bold text-black hover:brightness-110 active:scale-[0.99] transition-all">
+              <span>Save &amp; Secure Passcode</span>
+              <i data-lucide="check-circle-2" class="h-3.5 w-3.5"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Step 3: Success -->
+      <div id="forgot-step-success" class="hidden mt-6 text-center space-y-5">
+        <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.2)]">
+          <i data-lucide="check-circle-2" class="h-8 w-8"></i>
+        </div>
+        <div>
+          <h4 class="font-display text-lg font-bold text-white">Passcode Successfully Updated</h4>
+          <p class="text-xs text-[#a1a1aa] mt-1 max-w-sm mx-auto leading-relaxed">
+            Your confidential credentials have been synchronized with your private Stackly dining profile.
+          </p>
+        </div>
+        <button type="button" onclick="closeForgotModal()" class="w-full flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-500 py-3.5 text-xs font-bold text-black hover:brightness-110 transition-all shadow-lg cursor-pointer">
+          <span>Proceed to Sign In</span>
+          <i data-lucide="arrow-right" class="h-3.5 w-3.5"></i>
+        </button>
+      </div>
+
+      <!-- Concierge Escalation Footer -->
+      <div class="mt-6 pt-4 border-t border-[#232636] flex items-center justify-between text-[11px] text-[#71717a]">
+        <span>Immediate 24/7 Assistance?</span>
+        <a href="concierge.html" class="text-amber-400 hover:text-amber-300 font-semibold flex items-center gap-1">
+          <i data-lucide="phone-call" class="h-3 w-3"></i>
+          <span>Contact Head Sommelier</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+    let selectedLoginRole = 'client';
+    let generatedResetCode = '';
+    let showingPassword = false;
+
+    function setLoginRole(role) {
+      selectedLoginRole = role;
+      const clientTab = document.getElementById('role-tab-client');
+      const adminTab = document.getElementById('role-tab-admin');
+      const emailLabel = document.getElementById('email-label');
+      const emailInput = document.getElementById('login-email-input');
+      const btnText = document.getElementById('login-btn-text');
+
+      if (role === 'client') {
+        clientTab.className = 'flex items-center gap-2 rounded-xl px-3.5 py-1.5 text-xs font-medium transition-all bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-sm';
+        adminTab.className = 'flex items-center gap-2 rounded-xl px-3.5 py-1.5 text-xs font-medium transition-all text-[#a1a1aa] hover:text-white';
+        emailLabel.textContent = 'VIP Member Email Address';
+        emailInput.placeholder = 'vip.patron@domain.com';
+        btnText.textContent = 'Enter VIP Patron Suite';
+      } else {
+        adminTab.className = 'flex items-center gap-2 rounded-xl px-3.5 py-1.5 text-xs font-medium transition-all bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-sm';
+        clientTab.className = 'flex items-center gap-2 rounded-xl px-3.5 py-1.5 text-xs font-medium transition-all text-[#a1a1aa] hover:text-white';
+        emailLabel.textContent = "Maître D' Staff Email";
+        emailInput.placeholder = 'admin@stackly.com';
+        btnText.textContent = "Enter Maître D' Command Room";
+      }
+    }
+
+    function togglePasswordVisibility() {
+      showingPassword = !showingPassword;
+      const input = document.getElementById('login-password-input');
+      const icon = document.getElementById('password-eye-icon');
+      input.type = showingPassword ? 'text' : 'password';
+      icon.setAttribute('data-lucide', showingPassword ? 'eye-off' : 'eye');
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    function handleLoginSubmit(e) {
+      e.preventDefault();
+      const email = document.getElementById('login-email-input').value.trim();
+      if (!email) {
+        store.showToast('Authentication Error', 'Please enter your registered email address.', 'info');
+        return;
+      }
+      const btn = document.getElementById('login-submit-btn');
+      btn.disabled = true;
+      btn.innerHTML = '<div class="flex items-center gap-2"><div class="h-4 w-4 border-2 border-black border-t-transparent rounded-full animate-spin"></div><span>Authenticating Credentials...</span></div>';
+
+      setTimeout(() => {
+        const nameFromEmail = email.split('@')[0].replace(/[._]/g, ' ').split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+        store.login(email, selectedLoginRole, nameFromEmail);
+        setTimeout(() => {
+          window.location.href = selectedLoginRole === 'admin' ? 'admin-dashboard.html' : 'client-profile.html';
+        }, 300);
+      }, 500);
+    }
+
+    function openForgotModal() {
+      document.getElementById('forgot-password-modal').classList.remove('hidden');
+      const emailVal = document.getElementById('login-email-input').value;
+      if (emailVal) document.getElementById('reset-email-input').value = emailVal;
+      showForgotStep('request');
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    function closeForgotModal() {
+      document.getElementById('forgot-password-modal').classList.add('hidden');
+      store.showToast('Ready to Authenticate', 'You can now sign in using your updated passcode.', 'gold');
+    }
+
+    function showForgotStep(step) {
+      ['request', 'verify', 'success'].forEach(s => {
+        document.getElementById('forgot-step-' + s).classList.add('hidden');
+      });
+      document.getElementById('forgot-step-' + step).classList.remove('hidden');
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    function handleRequestResetCode(e) {
+      e.preventDefault();
+      const resetEmail = document.getElementById('reset-email-input').value.trim();
+      if (!resetEmail || !resetEmail.includes('@')) {
+        store.showToast('Invalid Email', 'Please provide a valid registered email address.', 'info');
+        return;
+      }
+      const code = Math.floor(100000 + Math.random() * 900000).toString();
+      generatedResetCode = code;
+      document.getElementById('reset-email-display').textContent = resetEmail;
+      document.getElementById('generated-code-display').textContent = 'Code: ' + code;
+      document.getElementById('recovery-code-input').value = code;
+      showForgotStep('verify');
+      store.showToast('Recovery Token Dispatched', `An encrypted 6-digit recovery code (${code}) has been prepared for ${resetEmail}.`, 'gold');
+    }
+
+    function handleVerifyReset(e) {
+      e.preventDefault();
+      const code = document.getElementById('recovery-code-input').value.trim();
+      const newPwd = document.getElementById('new-password-input').value;
+      const confirmPwd = document.getElementById('confirm-password-input').value;
+      if (!code || code.length < 4) {
+        store.showToast('Verification Required', 'Please enter your 6-digit security token.', 'info');
+        return;
+      }
+      if (!newPwd || newPwd.length < 6) {
+        store.showToast('Weak Password', 'New passcode must be at least 6 characters.', 'info');
+        return;
+      }
+      if (newPwd !== confirmPwd) {
+        store.showToast('Passcode Mismatch', 'The two passcodes entered do not match.', 'info');
+        return;
+      }
+      showForgotStep('success');
+      store.showToast('Passcode Successfully Reset', 'Your account vault has been updated with your new confidential passcode.', 'gold');
+    }
+
+    if (window.lucide) window.lucide.createIcons();
+  </script>
+</body>
+</html>

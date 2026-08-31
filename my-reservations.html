@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Reservations & Gastronomy Itineraries | Stackly Reserve</title>
+  <meta name="description" content="Manage your confirmed Michelin dining passes, view digital NFC tokens, and access your private saved wishlist hotlist on Stackly." />
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Cormorant Garamond', 'Georgia', 'serif'],
+            display: ['Cinzel', 'serif'],
+            sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-[#0b0c10] text-[#f3f4f6] antialiased selection:bg-amber-400 selection:text-black min-h-screen flex flex-col">
+
+  <!-- Mount Navbar Header -->
+  <div id="navbar-mount"></div>
+
+  <!-- Main Content Area -->
+  <main class="flex-1 pb-24">
+
+    <!-- Header Banner -->
+    <div class="border-b border-[#1f2230] bg-[#0f1118]/90 py-12 px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-amber-400 mb-1">
+              <svg viewBox="398 82 212 290" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0"><path fill="#fcd34d" d="M419.713867,256.179962 C408.001251,235.739304 410.215973,215.613876 419.889709,195.679504 C426.373138,182.319229 436.255493,171.444672 446.508270,160.904480 C457.075165,150.041229 468.783997,140.348602 478.792694,128.896606 C487.411407,119.035004 494.797852,108.464394 500.031921,96.425682 C500.738983,94.799370 501.001617,92.854477 502.785980,91.712807 C503.214905,91.838028 503.879059,91.821617 504.103485,92.127670 C514.526489,106.341171 522.003967,121.483376 518.287415,139.859406 C515.933533,151.498276 508.987885,160.308563 500.296600,167.942245 C487.788574,178.928223 473.634369,187.949692 462.046570,200.037262 C456.219025,206.116135 451.191589,212.659836 449.149933,221.054688 C445.376373,236.570572 454.272034,249.198563 470.197021,250.779221 C485.241028,252.272446 499.302216,248.880798 512.632202,241.996979 C514.021362,241.279602 515.213196,239.793518 517.062500,240.547546 C517.833252,242.063324 516.690857,242.794266 515.917847,243.562866 C502.480865,256.923462 487.519073,267.973206 468.591339,271.949402 C447.923096,276.291199 431.269562,272.383606 419.713867,256.179962 z"/><path fill="#fcd34d" d="M536.351807,311.352905 C521.089722,325.623138 508.631836,341.451172 501.644409,361.304535 C500.580017,360.856842 499.799347,360.777496 499.458496,360.348633 C491.323975,350.113098 485.458466,338.909088 484.707672,325.531189 C484.034546,313.536499 489.236786,303.909576 496.947052,295.363251 C506.737030,284.511749 519.089050,276.702271 530.329102,267.573334 C539.676453,259.981689 548.930542,252.352356 553.649658,240.719803 C556.247925,234.315125 556.803040,227.722214 555.167542,221.122284 C551.964783,208.197189 539.399353,200.886032 526.174622,203.877502 C513.911682,206.651428 503.242737,212.702515 493.079834,219.823700 C492.039246,220.552856 491.267578,221.851700 489.661957,221.557190 C488.659760,220.289383 489.653076,219.345703 490.287292,218.480408 C503.850159,199.976334 521.506714,187.674316 544.321167,183.636948 C574.742554,178.253418 599.437622,199.883118 594.804749,234.346802 C592.539368,251.198425 583.628967,264.794067 572.581299,277.156372 C561.558105,289.491241 548.610413,299.803345 536.351807,311.352905 z"/></svg>
+              <span>Guest Concierge Hub</span>
+            </div>
+            <h1 class="font-display text-3xl sm:text-4xl font-bold text-white tracking-wide">
+              My Gastronomy Itineraries
+            </h1>
+            <p class="text-sm text-[#8c8f9f] mt-1">
+              Manage confirmed Michelin reservations, view digital passes, and access your private hotlist.
+            </p>
+          </div>
+
+          <a href="restaurants.html" class="self-start sm:self-auto rounded-xl bg-gradient-to-r from-amber-400 to-amber-600 px-5 py-2.5 text-xs font-bold text-black hover:brightness-110 shadow-lg block">
+            + Reserve Another Table
+          </a>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="mt-8 flex gap-3 border-b border-[#202334] pb-px">
+          <button id="tab-btn-upcoming" onclick="setReservationsTab('upcoming')" class="flex items-center gap-2 pb-3 text-sm font-semibold border-b-2 border-amber-400 text-amber-300 transition-all cursor-pointer">
+            <i data-lucide="calendar" class="h-4 w-4"></i>
+            <span id="tab-label-upcoming">Upcoming Tables (0)</span>
+          </button>
+
+          <button id="tab-btn-saved" onclick="setReservationsTab('saved')" class="flex items-center gap-2 pb-3 text-sm font-semibold border-b-2 border-transparent text-[#8c8f9f] hover:text-white transition-all cursor-pointer">
+            <i data-lucide="heart" class="h-4 w-4"></i>
+            <span id="tab-label-saved">Saved Hotlist (0)</span>
+          </button>
+
+          <button id="tab-btn-past" onclick="setReservationsTab('past')" class="flex items-center gap-2 pb-3 text-sm font-semibold border-b-2 border-transparent text-[#8c8f9f] hover:text-white transition-all cursor-pointer">
+            <i data-lucide="history" class="h-4 w-4"></i>
+            <span id="tab-label-past">Dining History (0)</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab Contents Area -->
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-10" id="reservations-content-area">
+      <!-- Rendered by JS -->
+    </div>
+
+  </main>
+
+  <!-- Mount Footer -->
+  <div id="footer-mount"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/pages/my-reservations.js"></script>
+</body>
+</html>

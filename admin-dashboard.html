@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maître D’ Command Room | Stackly Reserve</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Cormorant Garamond', 'Georgia', 'serif'],
+            display: ['Cinzel', 'serif'],
+            sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"></script>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-[#0a0b0f] text-[#f3f4f6] antialiased selection:bg-amber-400 selection:text-black min-h-screen flex flex-col justify-between">
+
+  <!-- ADMIN HEADER -->
+  <header class="border-b border-[#1f2230] bg-[#10121a]/95 backdrop-blur-xl sticky top-0 z-40 px-4 sm:px-6 lg:px-8 py-3.5">
+    <div class="mx-auto max-w-7xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+      
+      <!-- Brand & Shift Info -->
+      <div class="flex items-center gap-3.5">
+        <a href="index.html" class="h-11 w-11 rounded-2xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-300 shadow-[0_0_20px_rgba(212,175,55,0.2)] hover:scale-105 transition-transform" title="Return to Public Site">
+          <i data-lucide="chef-hat" class="h-6 w-6"></i>
+        </a>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="font-display text-lg sm:text-xl font-bold text-white">
+              Maître D’ Command Room
+            </h1>
+            <span class="rounded-full bg-emerald-500/20 border border-emerald-500/30 px-2 py-0.5 text-[10px] font-bold text-emerald-300 flex items-center gap-1">
+              <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+              Live Dinner Service
+            </span>
+            <span id="admin-live-clock" class="hidden sm:inline-block font-mono text-xs text-amber-400 bg-[#161824] px-2 py-0.5 rounded-lg border border-[#2b2e40]">
+              19:45:00
+            </span>
+          </div>
+          <p class="text-xs text-[#a1a1aa] mt-0.5">
+            Shift Director: <span id="admin-director-name" class="text-amber-300 font-medium">Chef Laurent Mercier</span> (Operations Console)
+          </p>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="flex items-center flex-wrap gap-2.5">
+        <select id="admin-rest-select" onchange="renderAdminDashboard()" class="rounded-xl border border-[#2b2e40] bg-[#161826] px-3 py-1.5 text-xs text-white focus:border-amber-400 focus:outline-none">
+          <option value="r1">L’Aura Élégante (New York)</option>
+          <option value="r2">Sushi Shibata Ginza (Tokyo)</option>
+          <option value="r3">Il Giardino Sul Mare (Amalfi Coast)</option>
+          <option value="r4">Kallio & Måne (Stockholm)</option>
+          <option value="r5">Asador del Oro (Dubai)</option>
+          <option value="r6">Château de Vignoble (Bordeaux)</option>
+        </select>
+
+        <button onclick="toggleWalkInModal(true)" class="flex items-center gap-1.5 rounded-xl bg-amber-400 px-3.5 py-1.5 text-xs font-bold text-black hover:bg-amber-300 transition-colors shadow cursor-pointer">
+          <i data-lucide="plus" class="h-3.5 w-3.5"></i>
+          <span>Seat Walk-in</span>
+        </button>
+
+        <a href="index.html" class="flex items-center gap-1.5 rounded-xl border border-[#2b2e40] bg-[#141624] px-3 py-1.5 text-xs font-semibold text-[#a1a1aa] hover:text-white hover:border-amber-400/40 transition-all">
+          <i data-lucide="home" class="h-3.5 w-3.5 text-amber-400"></i>
+          <span class="hidden sm:inline">Public Site</span>
+        </a>
+
+        <button onclick="store.logout(); window.location.href='login.html';" class="flex items-center gap-1.5 rounded-xl border border-rose-500/30 bg-rose-500/10 px-3 py-1.5 text-xs font-semibold text-rose-300 hover:bg-rose-500/20 transition-colors cursor-pointer">
+          <i data-lucide="log-out" class="h-3.5 w-3.5"></i>
+          <span class="hidden sm:inline">Sign Out</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- DASHBOARD MAIN BODY -->
+  <main id="admin-main-stage" class="flex-1 mx-auto max-w-7xl w-full px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+    <!-- Rendered by JS -->
+  </main>
+
+  <!-- WALK-IN SEATING MODAL -->
+  <div id="walkin-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+    <div class="w-full max-w-md rounded-3xl border border-amber-500/30 bg-[#12141e] p-6 shadow-2xl space-y-5">
+      <div class="flex items-center justify-between border-b border-[#222534] pb-3">
+        <div class="flex items-center gap-2">
+          <i data-lucide="chef-hat" class="h-5 w-5 text-amber-400"></i>
+          <h3 class="font-display text-base font-bold text-white">Manual Walk-in Seating</h3>
+        </div>
+        <button onclick="toggleWalkInModal(false)" class="text-[#71717a] hover:text-white">
+          <i data-lucide="x" class="h-5 w-5"></i>
+        </button>
+      </div>
+
+      <form onsubmit="handleWalkInSubmit(event)" class="space-y-4 text-xs">
+        <div>
+          <label class="text-[#a1a1aa] block font-semibold mb-1">Guest Full Name</label>
+          <input type="text" id="walkin-name" required placeholder="e.g. VIP Walk-in Guest" class="w-full rounded-xl border border-[#2b2e40] bg-[#161826] px-3.5 py-2.5 text-white focus:border-amber-400 focus:outline-none" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="text-[#a1a1aa] block font-semibold mb-1">Party Size</label>
+            <input type="number" id="walkin-guests" min="1" max="12" value="2" class="w-full rounded-xl border border-[#2b2e40] bg-[#161826] px-3.5 py-2.5 text-white focus:border-amber-400 focus:outline-none" />
+          </div>
+          <div>
+            <label class="text-[#a1a1aa] block font-semibold mb-1">Assign Table #</label>
+            <input type="number" id="walkin-table" min="1" max="20" value="1" class="w-full rounded-xl border border-[#2b2e40] bg-[#161826] px-3.5 py-2.5 text-white focus:border-amber-400 focus:outline-none" />
+          </div>
+        </div>
+
+        <div>
+          <label class="text-[#a1a1aa] block font-semibold mb-1">Special Requests / Notes</label>
+          <input type="text" id="walkin-notes" value="Walk-in VIP seating" class="w-full rounded-xl border border-[#2b2e40] bg-[#161826] px-3.5 py-2.5 text-white focus:border-amber-400 focus:outline-none" />
+        </div>
+
+        <button type="submit" class="w-full mt-2 rounded-xl bg-gradient-to-r from-amber-400 to-amber-600 py-3 text-xs font-bold text-black hover:brightness-110 shadow cursor-pointer">
+          Seat Guest Immediately
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- DOSSIER MODAL -->
+  <div id="dossier-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+    <div id="dossier-modal-content" class="w-full max-w-lg rounded-3xl border border-amber-500/30 bg-[#12141e] p-6 shadow-2xl space-y-5">
+      <!-- Rendered by JS -->
+    </div>
+  </div>
+
+  <!-- DEDICATED ADMIN FOOTER -->
+  <footer class="border-t border-[#1f2230] bg-[#0c0d12] px-4 py-3 text-center text-[11px] text-[#71717a]">
+    <span>Stackly Reserve Maître D’ Command Room • Shift Operations Console Active</span>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/pages/admin-dashboard.js"></script>
+</body>
+</html>

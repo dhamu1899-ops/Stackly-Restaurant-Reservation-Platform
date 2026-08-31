@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VIP Patron Passport | Stackly Reserve</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Cormorant Garamond', 'Georgia', 'serif'],
+            display: ['Cinzel', 'serif'],
+            sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"></script>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-[#0a0b0f] text-[#f3f4f6] antialiased selection:bg-amber-400 selection:text-black min-h-screen flex flex-col justify-between">
+
+  <!-- VIP TOP BAR -->
+  <header class="border-b border-[#1f2230] bg-[#10121a]/95 backdrop-blur-xl sticky top-0 z-40 px-4 sm:px-6 lg:px-8 py-3.5">
+    <div class="mx-auto max-w-7xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+      
+      <div class="flex items-center gap-3.5">
+        <a href="index.html" class="h-11 w-11 rounded-2xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-300 shadow-[0_0_20px_rgba(212,175,55,0.2)] hover:scale-105 transition-transform" title="Return to Public Site">
+          <i data-lucide="crown" class="h-6 w-6"></i>
+        </a>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="font-display text-lg sm:text-xl font-bold text-white">
+              VIP Patron Passport
+            </h1>
+            <span id="vip-tier-badge" class="rounded-full bg-amber-500/20 border border-amber-500/40 px-2.5 py-0.5 text-[10px] font-bold text-amber-300">
+              Black Diamond VIP
+            </span>
+          </div>
+          <p class="text-xs text-[#a1a1aa] mt-0.5">
+            Passholder: <span id="vip-user-name" class="text-white font-medium">Lord Alexander Sterling</span> • ID: <span id="vip-user-id" class="font-mono text-amber-300">USR-9921</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="flex items-center flex-wrap gap-2.5">
+        <a href="restaurants.html" class="flex items-center gap-1.5 rounded-xl bg-amber-400 px-3.5 py-1.5 text-xs font-bold text-black hover:bg-amber-300 transition-colors shadow">
+          <i data-lucide="utensils" class="h-3.5 w-3.5"></i>
+          <span>Book a Table</span>
+        </a>
+
+        <a href="concierge.html" class="flex items-center gap-1.5 rounded-xl border border-amber-500/30 bg-[#161826] px-3.5 py-1.5 text-xs font-semibold text-amber-300 hover:bg-amber-500/10 transition-colors">
+          <i data-lucide="phone-call" class="h-3.5 w-3.5"></i>
+          <span>VIP Concierge</span>
+        </a>
+
+        <a href="index.html" class="flex items-center gap-1.5 rounded-xl border border-[#2b2e40] bg-[#141624] px-3.5 py-1.5 text-xs font-semibold text-[#a1a1aa] hover:text-white hover:border-amber-400/40 transition-all">
+          <i data-lucide="home" class="h-3.5 w-3.5 text-amber-400"></i>
+          <span class="hidden sm:inline">Public Site</span>
+        </a>
+
+        <button onclick="store.logout(); window.location.href='login.html';" class="flex items-center gap-1.5 rounded-xl border border-rose-500/30 bg-rose-500/10 px-3 py-1.5 text-xs font-semibold text-rose-300 hover:bg-rose-500/20 transition-colors cursor-pointer" title="Sign Out">
+          <i data-lucide="log-out" class="h-3.5 w-3.5"></i>
+          <span class="hidden sm:inline">Sign Out</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- DASHBOARD MAIN BODY -->
+  <main id="client-profile-stage" class="flex-1 mx-auto max-w-7xl w-full px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+    <!-- Rendered by JS -->
+  </main>
+
+  <!-- DIGITAL PASS POPUP MODAL -->
+  <div id="pass-popup-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+    <div id="pass-popup-content" class="w-full max-w-sm rounded-3xl border border-amber-500/40 bg-gradient-to-b from-[#1c1f2e] to-[#0c0d12] p-6 shadow-2xl space-y-5 text-center relative overflow-hidden">
+      <!-- Rendered by JS -->
+    </div>
+  </div>
+
+  <!-- DEDICATED VIP FOOTER -->
+  <footer class="border-t border-[#1f2230] bg-[#0c0d12] px-4 py-3 text-center text-[11px] text-[#71717a]">
+    <span>Stackly Reserve VIP Patron Portal • 24/7 Global Concierge: +1 (800) 589-STACK</span>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/pages/client-profile.js"></script>
+</body>
+</html>

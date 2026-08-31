@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stackly | Luxury Restaurant Reservations & Fine Dining Platform</title>
+  <meta name="description" content="Stackly is the premier fine dining reservation and table orchestration platform with interactive seating, Michelin-starred dining, and 24/7 VIP concierge." />
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Cormorant Garamond', 'Georgia', 'serif'],
+            display: ['Cinzel', 'serif'],
+            sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"></script>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-[#0b0c10] text-[#f3f4f6] antialiased selection:bg-amber-400 selection:text-black min-h-screen flex flex-col">
+
+  <!-- Mount Navbar Header -->
+  <div id="navbar-mount"></div>
+
+  <!-- Main Content Area -->
+  <main class="flex-1">
+
+    <!-- 1. HERO SECTION -->
+    <section class="relative min-h-[88vh] flex flex-col justify-center overflow-hidden border-b border-[#1f2230]">
+      <div class="absolute inset-0 z-0">
+        <img src="assets/asset-01.webp" alt="Fine Dining Atmosphere" class="h-full w-full object-cover object-center scale-105 filter brightness-[0.30] contrast-110" />
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0b0c10] via-[#0b0c10]/75 to-black/60"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-amber-500/10 via-transparent to-black/80"></div>
+      </div>
+
+      <div class="relative z-10 mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-4xl text-center space-y-6">
+          
+          <div class="inline-flex items-center gap-2 rounded-full border border-amber-500/40 bg-black/60 px-4 py-1.5 backdrop-blur-xl shadow-[0_0_20px_rgba(212,175,55,0.2)]">
+            <svg viewBox="398 82 212 290" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0"><path fill="#fcd34d" d="M419.713867,256.179962 C408.001251,235.739304 410.215973,215.613876 419.889709,195.679504 C426.373138,182.319229 436.255493,171.444672 446.508270,160.904480 C457.075165,150.041229 468.783997,140.348602 478.792694,128.896606 C487.411407,119.035004 494.797852,108.464394 500.031921,96.425682 C500.738983,94.799370 501.001617,92.854477 502.785980,91.712807 C503.214905,91.838028 503.879059,91.821617 504.103485,92.127670 C514.526489,106.341171 522.003967,121.483376 518.287415,139.859406 C515.933533,151.498276 508.987885,160.308563 500.296600,167.942245 C487.788574,178.928223 473.634369,187.949692 462.046570,200.037262 C456.219025,206.116135 451.191589,212.659836 449.149933,221.054688 C445.376373,236.570572 454.272034,249.198563 470.197021,250.779221 C485.241028,252.272446 499.302216,248.880798 512.632202,241.996979 C514.021362,241.279602 515.213196,239.793518 517.062500,240.547546 C517.833252,242.063324 516.690857,242.794266 515.917847,243.562866 C502.480865,256.923462 487.519073,267.973206 468.591339,271.949402 C447.923096,276.291199 431.269562,272.383606 419.713867,256.179962 z"/><path fill="#fcd34d" d="M536.351807,311.352905 C521.089722,325.623138 508.631836,341.451172 501.644409,361.304535 C500.580017,360.856842 499.799347,360.777496 499.458496,360.348633 C491.323975,350.113098 485.458466,338.909088 484.707672,325.531189 C484.034546,313.536499 489.236786,303.909576 496.947052,295.363251 C506.737030,284.511749 519.089050,276.702271 530.329102,267.573334 C539.676453,259.981689 548.930542,252.352356 553.649658,240.719803 C556.247925,234.315125 556.803040,227.722214 555.167542,221.122284 C551.964783,208.197189 539.399353,200.886032 526.174622,203.877502 C513.911682,206.651428 503.242737,212.702515 493.079834,219.823700 C492.039246,220.552856 491.267578,221.851700 489.661957,221.557190 C488.659760,220.289383 489.653076,219.345703 490.287292,218.480408 C503.850159,199.976334 521.506714,187.674316 544.321167,183.636948 C574.742554,178.253418 599.437622,199.883118 594.804749,234.346802 C592.539368,251.198425 583.628967,264.794067 572.581299,277.156372 C561.558105,289.491241 548.610413,299.803345 536.351807,311.352905 z"/></svg>
+            <span class="font-display text-xs font-semibold uppercase tracking-[0.25em] text-amber-200">
+              Stackly Reserve • Michelin Guide Partner 2026
+            </span>
+          </div>
+
+          <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.15]">
+            Reserve The World’s Most <br class="hidden sm:inline" />
+            <span class="gold-gradient-text">Coveted Dining Tables</span>
+          </h1>
+
+          <p class="mx-auto max-w-2xl text-base sm:text-lg text-[#b8bac7] font-light leading-relaxed">
+            Instant guaranteed reservations, 300-year hinoki sushi counters, panoramic skyline salons, and 18th-century limestone wine vaults worldwide via Stackly.
+          </p>
+
+          <!-- HERO SEARCH BAR -->
+          <div class="pt-4">
+            <form onsubmit="event.preventDefault(); window.location.href = 'restaurants.html?city=' + encodeURIComponent(document.getElementById('home-search-city').value);" class="mx-auto max-w-4xl rounded-3xl border border-amber-500/30 bg-[#12141e]/95 p-3 sm:p-4 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                
+                <div class="flex items-center gap-3 rounded-2xl border border-[#272a3b] bg-[#161826] px-4 py-3 text-left">
+                  <i data-lucide="map-pin" class="h-4 w-4 text-amber-400 shrink-0"></i>
+                  <div class="flex-1 min-w-0">
+                    <label class="block text-[10px] uppercase font-semibold tracking-wider text-[#71717a]">Destination</label>
+                    <select id="home-search-city" class="w-full bg-transparent text-xs font-semibold text-white focus:outline-none cursor-pointer truncate">
+                      <option value="All Global Destinations" class="bg-[#161826]">All Global Destinations</option>
+                      <option value="New York" class="bg-[#161826]">New York</option>
+                      <option value="Tokyo" class="bg-[#161826]">Tokyo</option>
+                      <option value="Amalfi Coast" class="bg-[#161826]">Amalfi Coast</option>
+                      <option value="Stockholm" class="bg-[#161826]">Stockholm</option>
+                      <option value="Dubai" class="bg-[#161826]">Dubai</option>
+                      <option value="Bordeaux" class="bg-[#161826]">Bordeaux</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-3 rounded-2xl border border-[#272a3b] bg-[#161826] px-4 py-3 text-left">
+                  <i data-lucide="calendar" class="h-4 w-4 text-amber-400 shrink-0"></i>
+                  <div class="flex-1 min-w-0">
+                    <label class="block text-[10px] uppercase font-semibold tracking-wider text-[#71717a]">Date</label>
+                    <input type="date" value="2026-09-02" class="w-full bg-transparent text-xs font-semibold text-white focus:outline-none cursor-pointer" />
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-3 rounded-2xl border border-[#272a3b] bg-[#161826] px-4 py-3 text-left">
+                  <i data-lucide="users" class="h-4 w-4 text-amber-400 shrink-0"></i>
+                  <div class="flex-1 min-w-0">
+                    <label class="block text-[10px] uppercase font-semibold tracking-wider text-[#71717a]">Guests</label>
+                    <select class="w-full bg-transparent text-xs font-semibold text-white focus:outline-none cursor-pointer">
+                      <option value="1" class="bg-[#161826]">1 Guest</option>
+                      <option value="2" selected class="bg-[#161826]">2 Guests</option>
+                      <option value="3" class="bg-[#161826]">3 Guests</option>
+                      <option value="4" class="bg-[#161826]">4 Guests</option>
+                      <option value="5" class="bg-[#161826]">5 Guests</option>
+                      <option value="6" class="bg-[#161826]">6 Guests</option>
+                      <option value="8" class="bg-[#161826]">8 Guests</option>
+                    </select>
+                  </div>
+                </div>
+
+                <button type="submit" class="flex h-full w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 px-6 py-3.5 text-sm font-bold text-black shadow-[0_0_25px_rgba(212,175,55,0.35)] hover:brightness-110 active:scale-95 transition-all cursor-pointer whitespace-nowrap">
+                  <i data-lucide="search" class="h-4 w-4"></i>
+                  <span>Find Tables</span>
+                </button>
+
+              </div>
+
+              <div class="mt-3 flex flex-wrap items-center justify-center gap-2 pt-2.5 border-t border-[#202334] text-xs text-[#8c8f9f]">
+                <span class="text-[#71717a]">Top Allocations:</span>
+                <a href="restaurants.html?city=New%20York" class="hover:text-amber-300 underline font-medium">NYC Hudson Yards</a>
+                <span>•</span>
+                <a href="restaurants.html?city=Tokyo" class="hover:text-amber-300 underline font-medium">Ginza Omakase</a>
+                <span>•</span>
+                <a href="restaurants.html?city=Amalfi%20Coast" class="hover:text-amber-300 underline font-medium">Amalfi Cliffside</a>
+                <span>•</span>
+                <a href="restaurants.html?city=Paris" class="hover:text-amber-300 underline font-medium">Paris 8th Arrondissement</a>
+              </div>
+            </form>
+          </div>
+
+          <div class="pt-6 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto text-center border-t border-[#202332]/60">
+            <div>
+              <span class="font-display text-2xl sm:text-3xl font-bold text-white">100%</span>
+              <span class="block text-xs text-[#8c8f9f] mt-0.5">Guaranteed Seating</span>
+            </div>
+            <div>
+              <span class="font-display text-2xl sm:text-3xl font-bold text-amber-300">3-Star</span>
+              <span class="block text-xs text-[#8c8f9f] mt-0.5">Michelin Allotments</span>
+            </div>
+            <div>
+              <span class="font-display text-2xl sm:text-3xl font-bold text-white">4,000+</span>
+              <span class="block text-xs text-[#8c8f9f] mt-0.5">Vintage Cellars</span>
+            </div>
+            <div>
+              <span class="font-display text-2xl sm:text-3xl font-bold text-amber-300">24/7</span>
+              <span class="block text-xs text-[#8c8f9f] mt-0.5">Stackly Concierge</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. LIVE TABLE RELEASES TICKER -->
+    <section class="py-8 px-4 sm:px-6 lg:px-8 border-b border-[#1c1d29] bg-[#090b10]">
+      <div class="mx-auto max-w-7xl">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-2">
+            <span class="flex h-2.5 w-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+            <h3 class="font-display text-xs font-bold uppercase tracking-[0.2em] text-white">
+              Live Stackly Table Releases & Instant Openings
+            </h3>
+          </div>
+          <span class="text-xs text-amber-400 font-mono hidden sm:inline">Refreshed live every 60s</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3">
+          
+          <a href="restaurant-detail.html?id=r1" class="rounded-2xl border border-[#232636] bg-[#12141e] p-3.5 hover:border-amber-500/50 transition-all cursor-pointer group shadow-lg flex flex-col justify-between block">
+            <div>
+              <div class="flex items-center justify-between text-[11px] mb-1">
+                <span class="font-mono text-amber-400 font-bold">New York</span>
+                <span class="text-[#a1a1aa]">Tonight 19:30</span>
+              </div>
+              <h4 class="font-display text-xs font-bold text-white group-hover:text-amber-300 transition-colors truncate">
+                L’Aura Élégante
+              </h4>
+              <p class="text-[10px] text-[#8c8f9f] mt-0.5 truncate">2 Seats (Skyline Booth)</p>
+            </div>
+            <div class="mt-2.5 pt-2 border-t border-[#1f2232] flex items-center justify-between text-[10px]">
+              <span class="text-[#71717a] truncate">Laurent Vasseur (3★)</span>
+              <span class="text-amber-300 font-semibold group-hover:underline flex items-center gap-0.5">
+                Claim <i data-lucide="chevron-right" class="h-3 w-3"></i>
+              </span>
+            </div>
+          </a>
+
+          <a href="restaurant-detail.html?id=r2" class="rounded-2xl border border-[#232636] bg-[#12141e] p-3.5 hover:border-amber-500/50 transition-all cursor-pointer group shadow-lg flex flex-col justify-between block">
+            <div>
+              <div class="flex items-center justify-between text-[11px] mb-1">
+                <span class="font-mono text-amber-400 font-bold">Tokyo</span>
+                <span class="text-[#a1a1aa]">Tomorrow 20:00</span>
+              </div>
+              <h4 class="font-display text-xs font-bold text-white group-hover:text-amber-300 transition-colors truncate">
+                Sushi Shibata Ginza
+              </h4>
+              <p class="text-[10px] text-[#8c8f9f] mt-0.5 truncate">4 Seats (Hinoki Counter)</p>
+            </div>
+            <div class="mt-2.5 pt-2 border-t border-[#1f2232] flex items-center justify-between text-[10px]">
+              <span class="text-[#71717a] truncate">Kenji Shibata (3★)</span>
+              <span class="text-amber-300 font-semibold group-hover:underline flex items-center gap-0.5">
+                Claim <i data-lucide="chevron-right" class="h-3 w-3"></i>
+              </span>
+            </div>
+          </a>
+
+          <a href="restaurant-detail.html?id=r6" class="rounded-2xl border border-[#232636] bg-[#12141e] p-3.5 hover:border-amber-500/50 transition-all cursor-pointer group shadow-lg flex flex-col justify-between block">
+            <div>
+              <div class="flex items-center justify-between text-[11px] mb-1">
+                <span class="font-mono text-amber-400 font-bold">Paris</span>
+                <span class="text-[#a1a1aa]">Friday 20:30</span>
+              </div>
+              <h4 class="font-display text-xs font-bold text-white group-hover:text-amber-300 transition-colors truncate">
+                Le Grand Étoile
+              </h4>
+              <p class="text-[10px] text-[#8c8f9f] mt-0.5 truncate">2 Seats (Vendôme Salon)</p>
+            </div>
+            <div class="mt-2.5 pt-2 border-t border-[#1f2232] flex items-center justify-between text-[10px]">
+              <span class="text-[#71717a] truncate">Camille Dubois (3★)</span>
+              <span class="text-amber-300 font-semibold group-hover:underline flex items-center gap-0.5">
+                Claim <i data-lucide="chevron-right" class="h-3 w-3"></i>
+              </span>
+            </div>
+          </a>
+
+          <a href="restaurant-detail.html?id=r3" class="rounded-2xl border border-[#232636] bg-[#12141e] p-3.5 hover:border-amber-500/50 transition-all cursor-pointer group shadow-lg flex flex-col justify-between block">
+            <div>
+              <div class="flex items-center justify-between text-[11px] mb-1">
+                <span class="font-mono text-amber-400 font-bold">Amalfi</span>
+                <span class="text-[#a1a1aa]">Saturday 19:00</span>
+              </div>
+              <h4 class="font-display text-xs font-bold text-white group-hover:text-amber-300 transition-colors truncate">
+                Terrazza Belvedere
+              </h4>
+              <p class="text-[10px] text-[#8c8f9f] mt-0.5 truncate">2 Seats (Cliff Edge)</p>
+            </div>
+            <div class="mt-2.5 pt-2 border-t border-[#1f2232] flex items-center justify-between text-[10px]">
+              <span class="text-[#71717a] truncate">Matteo Rossi (2★)</span>
+              <span class="text-amber-300 font-semibold group-hover:underline flex items-center gap-0.5">
+                Claim <i data-lucide="chevron-right" class="h-3 w-3"></i>
+              </span>
+            </div>
+          </a>
+
+          <a href="restaurant-detail.html?id=r7" class="rounded-2xl border border-[#232636] bg-[#12141e] p-3.5 hover:border-amber-500/50 transition-all cursor-pointer group shadow-lg flex flex-col justify-between block">
+            <div>
+              <div class="flex items-center justify-between text-[11px] mb-1">
+                <span class="font-mono text-amber-400 font-bold">London</span>
+                <span class="text-[#a1a1aa]">Sunday 18:45</span>
+              </div>
+              <h4 class="font-display text-xs font-bold text-white group-hover:text-amber-300 transition-colors truncate">
+                Mayfair Cellar & Grill
+              </h4>
+              <p class="text-[10px] text-[#8c8f9f] mt-0.5 truncate">2 Seats (Vault Room)</p>
+            </div>
+            <div class="mt-2.5 pt-2 border-t border-[#1f2232] flex items-center justify-between text-[10px]">
+              <span class="text-[#71717a] truncate">Arthur Pendelton (2★)</span>
+              <span class="text-amber-300 font-semibold group-hover:underline flex items-center gap-0.5">
+                Claim <i data-lucide="chevron-right" class="h-3 w-3"></i>
+              </span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. MICHELIN 3-STAR SPOTLIGHT -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 border-b border-[#1c1d29] bg-[#0d0e15]">
+      <div class="mx-auto max-w-7xl">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
+          <div>
+            <div class="flex items-center gap-2 text-amber-400 text-xs font-semibold uppercase tracking-wider mb-2">
+              <i data-lucide="star" class="h-4 w-4 fill-amber-400 text-amber-400"></i>
+              <span>The Pinnacle of Gastronomy</span>
+            </div>
+            <h2 class="font-display text-3xl sm:text-4xl font-bold text-white tracking-wide">
+              Three Michelin Star Sanctuaries
+            </h2>
+            <p class="text-sm text-[#8c8f9f] mt-1 max-w-xl">
+              Uncompromising artistry, legendary wine allocations, and multi-course sensory journeys celebrated by the Michelin Guide.
+            </p>
+          </div>
+
+          <a href="restaurants.html" class="flex items-center gap-2 text-sm font-semibold text-amber-300 hover:text-amber-200 transition-colors group">
+            <span>Explore All 3-Star Allocations</span>
+            <i data-lucide="arrow-right" class="h-4 w-4 transition-transform group-hover:translate-x-1"></i>
+          </a>
+        </div>
+
+        <div id="featured-restaurants-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. STACKLY TABLE ORCHESTRATION ENGINE -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 border-b border-[#1c1d29] bg-[#0b0c11]">
+      <div class="mx-auto max-w-7xl">
+        <div class="text-center max-w-2xl mx-auto mb-14">
+          <div class="inline-flex items-center gap-2 rounded-full border border-amber-500/40 bg-amber-500/10 px-3.5 py-1 text-xs font-semibold uppercase tracking-widest text-amber-300 mb-3">
+            <i data-lucide="zap" class="h-3.5 w-3.5"></i>
+            <span>Stackly Platform Architecture</span>
+          </div>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-white tracking-wide">
+            How Stackly Orchestrates Coveted Seating
+          </h2>
+          <p class="text-sm text-[#8c8f9f] mt-2 leading-relaxed">
+            Replacing chaotic telephone queues with automated maître d' table routing, cryptographic dining passes, and cellar decanting workflows.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="rounded-3xl border border-[#242738] bg-[#12141e] p-6 space-y-3 hover:border-amber-500/40 transition-all shadow-xl">
+            <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-500/15 border border-amber-500/30 text-amber-300">
+              <i data-lucide="crown" class="h-6 w-6"></i>
+            </div>
+            <h3 class="font-display text-lg font-bold text-white">Proprietary Proprietor Allotment</h3>
+            <p class="text-xs text-[#8c8f9f] leading-relaxed">
+              Direct contractual allocations with 3-Star chefs mean private tables are locked exclusively for Stackly members, even on peak weekend slots.
+            </p>
+          </div>
+
+          <div class="rounded-3xl border border-[#242738] bg-[#12141e] p-6 space-y-3 hover:border-amber-500/40 transition-all shadow-xl">
+            <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-500/15 border border-amber-500/30 text-amber-300">
+              <i data-lucide="layers" class="h-6 w-6"></i>
+            </div>
+            <h3 class="font-display text-lg font-bold text-white">Interactive 2D Seating Picker</h3>
+            <p class="text-xs text-[#8c8f9f] leading-relaxed">
+              Inspect floor layouts and reserve specific seating zones—from 8-seat Hinoki master sushi counters to skyline panoramic banquettes.
+            </p>
+          </div>
+
+          <div class="rounded-3xl border border-[#242738] bg-[#12141e] p-6 space-y-3 hover:border-amber-500/40 transition-all shadow-xl">
+            <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-500/15 border border-amber-500/30 text-amber-300">
+              <i data-lucide="wine" class="h-6 w-6"></i>
+            </div>
+            <h3 class="font-display text-lg font-bold text-white">Pre-Decant Sommelier Vault</h3>
+            <p class="text-xs text-[#8c8f9f] leading-relaxed">
+              Request Grand Cru bottles to be uncorked and rested at cellar temperature hours before arrival, synchronized to your exact reservation time.
+            </p>
+          </div>
+
+          <div class="rounded-3xl border border-[#242738] bg-[#12141e] p-6 space-y-3 hover:border-amber-500/40 transition-all shadow-xl">
+            <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-500/15 border border-amber-500/30 text-amber-300">
+              <i data-lucide="lock" class="h-6 w-6"></i>
+            </div>
+            <h3 class="font-display text-lg font-bold text-white">Cryptographic VIP Pass</h3>
+            <p class="text-xs text-[#8c8f9f] leading-relaxed">
+              Each reservation produces a dynamic digital dining token with verified guest profile, dietary flags, and discreet arrival clearance.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. CURATED GASTRONOMY ATMOSPHERES -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 border-b border-[#1c1d29]">
+      <div class="mx-auto max-w-7xl">
+        <div class="text-center max-w-2xl mx-auto mb-14">
+          <span class="font-display text-xs font-semibold uppercase tracking-[0.25em] text-amber-300">Curated Horizons</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-white tracking-wide mt-2">
+            Atmospheres Crafted for Memory
+          </h2>
+          <p class="text-sm text-[#8c8f9f] mt-2">
+            From intimate counters to suspended terraces above the sea, choose your dining ambiance.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <a href="restaurants.html?city=New%20York" class="group relative h-80 overflow-hidden rounded-3xl border border-[#272a39] cursor-pointer shadow-xl transition-all duration-500 hover:border-amber-500/50 hover:-translate-y-1.5 block">
+            <img src="assets/asset-02.webp" alt="The Master Chef Counter" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+            <div class="absolute bottom-0 inset-x-0 p-6">
+              <span class="rounded-full bg-amber-500/20 border border-amber-500/30 px-2.5 py-0.5 text-[10px] font-semibold text-amber-300 backdrop-blur-md">
+                12 Exclusive Seats
+              </span>
+              <h3 class="font-display text-xl font-bold text-white mt-2 group-hover:text-amber-300 transition-colors">
+                The Master Chef Counter
+              </h3>
+              <p class="text-xs text-[#a1a1aa] mt-1 line-clamp-2">Direct kitchen dialogue & culinary theater</p>
+            </div>
+          </a>
+
+          <a href="restaurants.html?city=Bordeaux" class="group relative h-80 overflow-hidden rounded-3xl border border-[#272a39] cursor-pointer shadow-xl transition-all duration-500 hover:border-amber-500/50 hover:-translate-y-1.5 block">
+            <img src="assets/asset-03.webp" alt="Ancient Limestone Cellars" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+            <div class="absolute bottom-0 inset-x-0 p-6">
+              <span class="rounded-full bg-amber-500/20 border border-amber-500/30 px-2.5 py-0.5 text-[10px] font-semibold text-amber-300 backdrop-blur-md">
+                1750 Vintage Crypts
+              </span>
+              <h3 class="font-display text-xl font-bold text-white mt-2 group-hover:text-amber-300 transition-colors">
+                Ancient Limestone Cellars
+              </h3>
+              <p class="text-xs text-[#a1a1aa] mt-1 line-clamp-2">Subterranean Grand Cru library pourings</p>
+            </div>
+          </a>
+
+          <a href="restaurants.html?city=Amalfi%20Coast" class="group relative h-80 overflow-hidden rounded-3xl border border-[#272a39] cursor-pointer shadow-xl transition-all duration-500 hover:border-amber-500/50 hover:-translate-y-1.5 block">
+            <img src="assets/asset-04.webp" alt="Suspended Cliff Terraces" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+            <div class="absolute bottom-0 inset-x-0 p-6">
+              <span class="rounded-full bg-amber-500/20 border border-amber-500/30 px-2.5 py-0.5 text-[10px] font-semibold text-amber-300 backdrop-blur-md">
+                Direct Tyrrhenian Sea
+              </span>
+              <h3 class="font-display text-xl font-bold text-white mt-2 group-hover:text-amber-300 transition-colors">
+                Suspended Cliff Terraces
+              </h3>
+              <p class="text-xs text-[#a1a1aa] mt-1 line-clamp-2">Sunset candlelit dinners in Positano</p>
+            </div>
+          </a>
+
+          <a href="restaurants.html?city=Stockholm" class="group relative h-80 overflow-hidden rounded-3xl border border-[#272a39] cursor-pointer shadow-xl transition-all duration-500 hover:border-amber-500/50 hover:-translate-y-1.5 block">
+            <img src="assets/asset-05.webp" alt="Live Birch Wood Hearth" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+            <div class="absolute bottom-0 inset-x-0 p-6">
+              <span class="rounded-full bg-amber-500/20 border border-amber-500/30 px-2.5 py-0.5 text-[10px] font-semibold text-amber-300 backdrop-blur-md">
+                Wild Foraged Tasting
+              </span>
+              <h3 class="font-display text-xl font-bold text-white mt-2 group-hover:text-amber-300 transition-colors">
+                Live Birch Wood Hearth
+              </h3>
+              <p class="text-xs text-[#a1a1aa] mt-1 line-clamp-2">Stockholm archipelago wood fire</p>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. STACKLY VIP MEMBERSHIP PRIVILEGES -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 border-b border-[#1c1d29] bg-[#0c0d14]">
+      <div class="mx-auto max-w-7xl">
+        <div class="text-center max-w-2xl mx-auto mb-14">
+          <span class="font-display text-xs font-semibold uppercase tracking-[0.25em] text-amber-300">Tier Privileges</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-white tracking-wide mt-2">
+            Stackly VIP Patron Membership
+          </h2>
+          <p class="text-sm text-[#8c8f9f] mt-2">
+            Elevate your dining privileges with guaranteed allotments, private jet catering partnerships, and sommelier cellar access.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Gold -->
+          <div class="rounded-3xl border border-[#272a39] bg-[#12141e] p-8 space-y-6 flex flex-col justify-between shadow-xl">
+            <div>
+              <span class="font-mono text-xs text-amber-400 font-bold uppercase">Standard Tier</span>
+              <h3 class="font-display text-2xl font-bold text-white mt-1">Gold Connoisseur</h3>
+              <p class="text-xs text-[#8c8f9f] mt-2">Essential access to premier Michelin reservations and seasonal drops.</p>
+              
+              <div class="mt-6 space-y-3 text-xs text-[#d4d4d8]">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="check-circle-2" class="h-4 w-4 text-amber-400 shrink-0"></i>
+                  <span>30-day advance booking window</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="check-circle-2" class="h-4 w-4 text-amber-400 shrink-0"></i>
+                  <span>Digital Dining NFC Pass generation</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="check-circle-2" class="h-4 w-4 text-amber-400 shrink-0"></i>
+                  <span>Standard table cancellation protection</span>
+                </div>
+              </div>
+            </div>
+
+            <a href="signup.html" class="w-full text-center rounded-2xl border border-[#2b2e40] bg-[#161826] py-3 text-xs font-bold text-white hover:border-amber-400 transition-all block">
+              Apply for Gold
+            </a>
+          </div>
+
+          <!-- Black Diamond -->
+          <div class="relative rounded-3xl border-2 border-amber-400 bg-gradient-to-b from-[#181a28] to-[#10121c] p-8 space-y-6 flex flex-col justify-between shadow-[0_0_40px_rgba(212,175,55,0.2)]">
+            <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-amber-400 to-amber-600 px-4 py-1 text-[10px] font-bold text-black uppercase tracking-wider">
+              Most Coveted
+            </div>
+
+            <div>
+              <span class="font-mono text-xs text-amber-300 font-bold uppercase">Premier VIP</span>
+              <h3 class="font-display text-2xl font-bold text-white mt-1">Black Diamond VIP</h3>
+              <p class="text-xs text-[#8c8f9f] mt-2">Unrestricted access to sold-out 3-Star allotments and dedicated Maître Concierge.</p>
+              
+              <div class="mt-6 space-y-3 text-xs text-white">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="check-circle-2" class="h-4 w-4 text-amber-400 shrink-0"></i>
+                  <span><strong>Instant Sold-Out Seating:</strong> Proprietary allotments</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="check-circle-2" class="h-4 w-4 text-amber-400 shrink-0"></i>
+                  <span><strong>24/7 Dedicated Concierge Desk:</strong> Direct phone/WhatsApp</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="check-circle-2" class="h-4 w-4 text-amber-400 shrink-0"></i>
+                  <span><strong>Château Cellar Sourcing:</strong> Rare vintage pre-decanting</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="check-circle-2" class="h-4 w-4 text-amber-400 shrink-0"></i>
+                  <span><strong>Private Salon & Jet Catering:</strong> Global coordination</span>
+                </div>
+              </div>
+            </div>
+
+            <a href="signup.html" class="w-full text-center rounded-2xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 py-3.5 text-xs font-bold text-black hover:brightness-110 active:scale-95 transition-all shadow block">
+              Join Black Diamond Circle
+            </a>
+          </div>
+
+          <!-- Sommelier Council -->
+          <div class="rounded-3xl border border-[#272a39] bg-[#12141e] p-8 space-y-6 flex flex-col justify-between shadow-xl">
+            <div>
+              <span class="font-mono text-xs text-amber-400 font-bold uppercase">Wine Collectors</span>
+              <h3 class="font-display text-2xl font-bold text-white mt-1">Grand Cru Sommelier Select</h3>
+              <p class="text-xs text-[#8c8f9f] mt-2">For dedicated vintage collectors, private vineyard tours, and barrel tastings.</p>
+              
+              <div class="mt-6 space-y-3 text-xs text-[#d4d4d8]">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="check-circle-2" class="h-4 w-4 text-amber-400 shrink-0"></i>
+                  <span>Direct winery cellar allocation rights</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="check-circle-2" class="h-4 w-4 text-amber-400 shrink-0"></i>
+                  <span>Zero corkage fees at all partner restaurants</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="check-circle-2" class="h-4 w-4 text-amber-400 shrink-0"></i>
+                  <span>Quarterly Master Sommelier private pourings</span>
+                </div>
+              </div>
+            </div>
+
+            <a href="concierge.html" class="w-full text-center rounded-2xl border border-[#2b2e40] bg-[#161826] py-3 text-xs font-bold text-white hover:border-amber-400 transition-all block">
+              Inquire With Sommelier
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. PRIVATE MASTERCLASSES & EXPERIENCES -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 border-b border-[#1c1d29] bg-[#0e1017]">
+      <div class="mx-auto max-w-7xl">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
+          <div>
+            <span class="font-display text-xs font-semibold uppercase tracking-[0.25em] text-amber-300">
+              Beyond Standard Reservations
+            </span>
+            <h2 class="font-display text-3xl sm:text-4xl font-bold text-white tracking-wide mt-1">
+              Private Masterclasses & Rare Tastings
+            </h2>
+            <p class="text-sm text-[#8c8f9f] mt-1 max-w-xl">
+              Exclusive ticketed access to private cellars, Toyosu knife masterclasses, and yacht sunset dinners via Stackly.
+            </p>
+          </div>
+
+          <a href="restaurants.html" class="flex items-center gap-2 text-sm font-semibold text-amber-300 hover:text-amber-200 transition-colors group">
+            <span>Explore Chef Counters & Tasting Menus</span>
+            <i data-lucide="arrow-right" class="h-4 w-4 transition-transform group-hover:translate-x-1"></i>
+          </a>
+        </div>
+
+        <div id="featured-experiences-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. PRESS ACCLAIM -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 border-b border-[#1c1d29] bg-[#0b0c11]">
+      <div class="mx-auto max-w-7xl">
+        <div class="text-center max-w-2xl mx-auto mb-14">
+          <span class="font-display text-xs font-semibold uppercase tracking-[0.25em] text-amber-300">Press & Accolades</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-white tracking-wide mt-2">
+            Recognized by Global Gastronomy Authorities
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="rounded-3xl border border-[#242738] bg-[#12141e] p-8 space-y-4 shadow-xl">
+            <div class="flex items-center gap-1 text-amber-400">
+              <i data-lucide="star" class="h-4 w-4 fill-amber-400"></i>
+              <i data-lucide="star" class="h-4 w-4 fill-amber-400"></i>
+              <i data-lucide="star" class="h-4 w-4 fill-amber-400"></i>
+              <i data-lucide="star" class="h-4 w-4 fill-amber-400"></i>
+              <i data-lucide="star" class="h-4 w-4 fill-amber-400"></i>
+            </div>
+            <p class="text-sm text-[#b8bac7] italic leading-relaxed">
+              “Stackly has solved the impossible puzzle of high-end dining: providing immediate, guaranteed access to the world’s most elusive 3-Star Michelin tables with absolute dignity.”
+            </p>
+            <div class="pt-2 border-t border-[#1f2232]">
+              <h4 class="font-display text-sm font-bold text-white">The International Epicure</h4>
+              <p class="text-xs text-amber-300">Paris & New York Editorial</p>
+            </div>
+          </div>
+
+          <div class="rounded-3xl border border-[#242738] bg-[#12141e] p-8 space-y-4 shadow-xl">
+            <div class="flex items-center gap-1 text-amber-400">
+              <i data-lucide="star" class="h-4 w-4 fill-amber-400"></i>
+              <i data-lucide="star" class="h-4 w-4 fill-amber-400"></i>
+              <i data-lucide="star" class="h-4 w-4 fill-amber-400"></i>
+              <i data-lucide="star" class="h-4 w-4 fill-amber-400"></i>
+              <i data-lucide="star" class="h-4 w-4 fill-amber-400"></i>
+            </div>
+            <p class="text-sm text-[#b8bac7] italic leading-relaxed">
+              “The precision of the table selection and sommelier pre-arrival coordination makes Stackly an indispensable tool for serious fine dining patrons.”
+            </p>
+            <div class="pt-2 border-t border-[#1f2232]">
+              <h4 class="font-display text-sm font-bold text-white">World Gastronomy Review</h4>
+              <p class="text-xs text-amber-300">Tokyo Bureau</p>
+            </div>
+          </div>
+
+          <div class="rounded-3xl border border-[#242738] bg-[#12141e] p-8 space-y-4 shadow-xl">
+            <div class="flex items-center gap-1 text-amber-400">
+              <i data-lucide="star" class="h-4 w-4 fill-amber-400"></i>
+              <i data-lucide="star" class="h-4 w-4 fill-amber-400"></i>
+              <i data-lucide="star" class="h-4 w-4 fill-amber-400"></i>
+              <i data-lucide="star" class="h-4 w-4 fill-amber-400"></i>
+              <i data-lucide="star" class="h-4 w-4 fill-amber-400"></i>
+            </div>
+            <p class="text-sm text-[#b8bac7] italic leading-relaxed">
+              “From private salon buyouts in Mayfair to cliffside terraces in Amalfi, Stackly sets the new gold benchmark for luxury table orchestration.”
+            </p>
+            <div class="pt-2 border-t border-[#1f2232]">
+              <h4 class="font-display text-sm font-bold text-white">Haute Dining Gazette</h4>
+              <p class="text-xs text-amber-300">London Bureau</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. FREQUENTLY ASKED QUESTIONS ACCORDION -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 border-b border-[#1c1d29] bg-[#0e1017]">
+      <div class="mx-auto max-w-4xl">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <span class="font-display text-xs font-semibold uppercase tracking-[0.25em] text-amber-300">Patron Questions</span>
+          <h2 class="font-display text-3xl font-bold text-white tracking-wide mt-2">
+            Frequently Asked Questions
+          </h2>
+        </div>
+
+        <div class="space-y-3">
+          <div class="rounded-2xl border border-[#262838] bg-[#12141e] overflow-hidden transition-all">
+            <button onclick="toggleFaq(0)" class="w-full flex items-center justify-between p-5 text-left text-sm font-semibold text-white hover:text-amber-300 transition-colors cursor-pointer">
+              <span>How does Stackly guarantee sold-out Michelin 3-Star reservations?</span>
+              <i data-lucide="chevron-down" id="faq-icon-0" class="h-4 w-4 text-amber-400 transition-transform duration-300"></i>
+            </button>
+            <div id="faq-body-0" class="hidden px-5 pb-5 text-xs text-[#8c8f9f] leading-relaxed border-t border-[#1f2232] pt-4">
+              Stackly operates directly with restaurant proprietors and executive chefs. We hold proprietary, contractually reserved table allotments at every partner establishment, allowing verified members to book tables even when public reservations have been filled for months.
+            </div>
+          </div>
+
+          <div class="rounded-2xl border border-[#262838] bg-[#12141e] overflow-hidden transition-all">
+            <button onclick="toggleFaq(1)" class="w-full flex items-center justify-between p-5 text-left text-sm font-semibold text-white hover:text-amber-300 transition-colors cursor-pointer">
+              <span>Can I select specific dining areas, such as the Hinoki counter or Skyline banquettes?</span>
+              <i data-lucide="chevron-down" id="faq-icon-1" class="h-4 w-4 text-amber-400 transition-transform duration-300"></i>
+            </button>
+            <div id="faq-body-1" class="hidden px-5 pb-5 text-xs text-[#8c8f9f] leading-relaxed border-t border-[#1f2232] pt-4">
+              Yes. Every partner restaurant on Stackly includes interactive seating zone selection. You can choose whether you prefer the primary dining salon, the direct chef counter, or private booths.
+            </div>
+          </div>
+
+          <div class="rounded-2xl border border-[#262838] bg-[#12141e] overflow-hidden transition-all">
+            <button onclick="toggleFaq(2)" class="w-full flex items-center justify-between p-5 text-left text-sm font-semibold text-white hover:text-amber-300 transition-colors cursor-pointer">
+              <span>How do dietary restrictions and bespoke wine pairings work?</span>
+              <i data-lucide="chevron-down" id="faq-icon-2" class="h-4 w-4 text-amber-400 transition-transform duration-300"></i>
+            </button>
+            <div id="faq-body-2" class="hidden px-5 pb-5 text-xs text-[#8c8f9f] leading-relaxed border-t border-[#1f2232] pt-4">
+              During reservation checkout, you can input granular dietary preferences, allergies, and requests for rare vintage Grand Cru decanting. Your preferences are transmitted securely to the Maître D’ before your arrival.
+            </div>
+          </div>
+
+          <div class="rounded-2xl border border-[#262838] bg-[#12141e] overflow-hidden transition-all">
+            <button onclick="toggleFaq(3)" class="w-full flex items-center justify-between p-5 text-left text-sm font-semibold text-white hover:text-amber-300 transition-colors cursor-pointer">
+              <span>What is the Stackly Digital NFC Dining Pass?</span>
+              <i data-lucide="chevron-down" id="faq-icon-3" class="h-4 w-4 text-amber-400 transition-transform duration-300"></i>
+            </button>
+            <div id="faq-body-3" class="hidden px-5 pb-5 text-xs text-[#8c8f9f] leading-relaxed border-t border-[#1f2232] pt-4">
+              Confirmed reservations generate a private cryptographically verifiable Digital Dining Pass accessible on your device. Presenting your digital pass at the venue entrance grants seamless immediate seating without wait times.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. CHEF PHILOSOPHY BANNER (Full-bleed) -->
+    <section class="relative py-24 px-4 sm:px-6 lg:px-8 border-b border-[#1c1d29] overflow-hidden">
+      <div class="absolute inset-0 z-0">
+        <img
+          src="assets/asset-06.webp"
+          alt="Chef Preparing Food"
+          class="h-full w-full object-cover filter brightness-[0.25]"
+        />
+        <div class="absolute inset-0 bg-gradient-to-r from-[#0b0c10] via-[#0b0c10]/90 to-transparent"></div>
+      </div>
+
+      <div class="relative z-10 mx-auto max-w-7xl">
+        <div class="max-w-2xl space-y-6">
+          <div class="inline-flex items-center gap-2 rounded-full border border-amber-500/40 bg-amber-500/10 px-3.5 py-1 text-xs font-semibold text-amber-300">
+            <i data-lucide="chef-hat" class="h-4 w-4"></i>
+            <span>The Culinary Symphony</span>
+          </div>
+
+          <h2 class="font-display text-3xl sm:text-5xl font-bold text-white leading-tight">
+            "Fine dining is not merely sustenance. It is an emotional archive of time, soil, and human passion."
+          </h2>
+
+          <div class="flex items-center gap-4 pt-2">
+            <img
+              src="assets/asset-07.webp"
+              alt="Chef Laurent Vasseur"
+              class="h-14 w-14 rounded-full border-2 border-amber-400 object-cover shadow-lg"
+            />
+            <div>
+              <h4 class="font-display text-lg font-bold text-white">Chef Laurent Vasseur</h4>
+              <p class="text-xs text-amber-300">3 Michelin Stars • Stackly Culinary Advisory</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. VIP CONCIERGE CTA -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-5xl rounded-3xl border border-amber-500/40 bg-gradient-to-b from-[#161826] via-[#10121a] to-[#0a0b10] p-8 sm:p-12 text-center shadow-2xl relative overflow-hidden">
+        <div class="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-amber-500/10 blur-[80px]"></div>
+
+        <i data-lucide="crown" class="h-10 w-10 text-amber-400 mx-auto mb-4"></i>
+        <h3 class="font-display text-3xl sm:text-4xl font-bold text-white">
+          Require Private Salon Buyout or Bespoke Itinerary?
+        </h3>
+        <p class="mt-3 text-sm text-[#8c8f9f] max-w-xl mx-auto leading-relaxed">
+          Our Dedicated Stackly VIP Concierge handles multi-city gastronomy reservations, private jet catering, and customized tasting menus for high-profile connoisseurs.
+        </p>
+
+        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="concierge.html" class="w-full sm:w-auto rounded-xl bg-gradient-to-r from-amber-400 to-amber-600 px-8 py-3.5 text-sm font-bold text-black hover:brightness-110 active:scale-95 transition-all shadow-[0_0_25px_rgba(212,175,55,0.3)] block text-center">
+            Contact VIP Concierge Desk
+          </a>
+          <a href="restaurants.html" class="w-full sm:w-auto rounded-xl border border-[#303348] bg-[#181a27] px-8 py-3.5 text-sm font-semibold text-white hover:bg-[#222536] transition-colors block text-center">
+            Browse All Michelin Tables
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- Mount Footer -->
+  <div id="footer-mount"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/pages/home.js"></script>
+  <script>
+    function toggleFaq(index) {
+      const body = document.getElementById(`faq-body-${index}`);
+      const icon = document.getElementById(`faq-icon-${index}`);
+      if (body) {
+        body.classList.toggle('hidden');
+        if (icon) icon.classList.toggle('rotate-180');
+      }
+    }
+  </script>
+</body>
+</html>

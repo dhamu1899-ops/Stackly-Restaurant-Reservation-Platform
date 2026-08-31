@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VIP Membership Application | Stackly Reserve</title>
+  <meta name="description" content="Apply for your Stackly Reserve VIP dining membership and unlock exclusive access to Michelin 3-star restaurant table allocations worldwide." />
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Cormorant Garamond', 'Georgia', 'serif'],
+            display: ['Cinzel', 'serif'],
+            sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-[#090a0f] text-[#f3f4f6] antialiased selection:bg-amber-400 selection:text-black min-h-screen flex flex-col justify-between relative overflow-x-hidden">
+
+  <!-- Ambient Background Glow -->
+  <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+    <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-amber-500/10 rounded-full blur-[160px]"></div>
+  </div>
+
+  <!-- 1. DEDICATED SIGNUP TOP BAR -->
+  <header class="relative z-20 border-b border-[#1c1f2e] bg-[#0d0e15]/90 backdrop-blur-md px-4 sm:px-8 py-4">
+    <div class="mx-auto max-w-7xl flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2.5 group" id="signup-brand-logo">
+        <svg viewBox="398 82 212 290" xmlns="http://www.w3.org/2000/svg" class="h-9 w-9 shrink-0 transition-transform duration-300 group-hover:scale-105 filter drop-shadow-[0_0_12px_rgba(252,211,77,0.3)]"><path fill="#fcd34d" d="M419.713867,256.179962 C408.001251,235.739304 410.215973,215.613876 419.889709,195.679504 C426.373138,182.319229 436.255493,171.444672 446.508270,160.904480 C457.075165,150.041229 468.783997,140.348602 478.792694,128.896606 C487.411407,119.035004 494.797852,108.464394 500.031921,96.425682 C500.738983,94.799370 501.001617,92.854477 502.785980,91.712807 C503.214905,91.838028 503.879059,91.821617 504.103485,92.127670 C514.526489,106.341171 522.003967,121.483376 518.287415,139.859406 C515.933533,151.498276 508.987885,160.308563 500.296600,167.942245 C487.788574,178.928223 473.634369,187.949692 462.046570,200.037262 C456.219025,206.116135 451.191589,212.659836 449.149933,221.054688 C445.376373,236.570572 454.272034,249.198563 470.197021,250.779221 C485.241028,252.272446 499.302216,248.880798 512.632202,241.996979 C514.021362,241.279602 515.213196,239.793518 517.062500,240.547546 C517.833252,242.063324 516.690857,242.794266 515.917847,243.562866 C502.480865,256.923462 487.519073,267.973206 468.591339,271.949402 C447.923096,276.291199 431.269562,272.383606 419.713867,256.179962 z"/><path fill="#fcd34d" d="M536.351807,311.352905 C521.089722,325.623138 508.631836,341.451172 501.644409,361.304535 C500.580017,360.856842 499.799347,360.777496 499.458496,360.348633 C491.323975,350.113098 485.458466,338.909088 484.707672,325.531189 C484.034546,313.536499 489.236786,303.909576 496.947052,295.363251 C506.737030,284.511749 519.089050,276.702271 530.329102,267.573334 C539.676453,259.981689 548.930542,252.352356 553.649658,240.719803 C556.247925,234.315125 556.803040,227.722214 555.167542,221.122284 C551.964783,208.197189 539.399353,200.886032 526.174622,203.877502 C513.911682,206.651428 503.242737,212.702515 493.079834,219.823700 C492.039246,220.552856 491.267578,221.851700 489.661957,221.557190 C488.659760,220.289383 489.653076,219.345703 490.287292,218.480408 C503.850159,199.976334 521.506714,187.674316 544.321167,183.636948 C574.742554,178.253418 599.437622,199.883118 594.804749,234.346802 C592.539368,251.198425 583.628967,264.794067 572.581299,277.156372 C561.558105,289.491241 548.610413,299.803345 536.351807,311.352905 z"/></svg>
+        <div class="flex flex-col text-left">
+          <span class="font-display tracking-[0.2em] text-base font-bold text-white group-hover:text-amber-300 transition-colors">STACKLY</span>
+          <span class="text-[9px] uppercase tracking-[0.2em] text-amber-400 font-semibold">Member Induction</span>
+        </div>
+      </a>
+
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="flex items-center gap-1.5 rounded-xl border border-[#2b2e40] bg-[#141624] px-3.5 py-1.5 text-xs font-semibold text-[#a1a1aa] hover:text-white hover:border-amber-400/40 transition-all">
+          <i data-lucide="home" class="h-3.5 w-3.5 text-amber-400"></i>
+          <span>Back to Home</span>
+        </a>
+        <a href="login.html" class="rounded-xl bg-amber-500/15 border border-amber-500/30 px-3.5 py-1.5 text-xs font-semibold text-amber-300 hover:bg-amber-500/25 transition-all">
+          Sign In Instead
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. SIGNUP CONTAINER -->
+  <main class="relative z-10 flex-1 flex items-center justify-center px-4 py-12">
+    <div class="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+
+      <!-- Left Side: Membership Perks & Charter -->
+      <div class="lg:col-span-5 rounded-3xl border border-[#272a3b] bg-gradient-to-b from-[#141622] via-[#0f1118] to-[#0c0d12] p-8 flex flex-col justify-between relative overflow-hidden shadow-2xl">
+        <div class="space-y-6 relative z-10">
+          <div class="flex items-center gap-3">
+            <div class="h-12 w-12 rounded-2xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center shadow-[0_0_20px_rgba(212,175,55,0.2)]">
+              <i data-lucide="crown" class="h-6 w-6 text-amber-300"></i>
+            </div>
+            <div>
+              <span class="font-display tracking-[0.2em] text-lg font-bold text-white block">STACKLY RESERVE</span>
+              <span class="text-[10px] uppercase tracking-[0.25em] text-amber-400 font-medium">Private Member Induction</span>
+            </div>
+          </div>
+
+          <div class="pt-2 space-y-3">
+            <h2 class="font-display text-2xl sm:text-3xl font-bold text-white leading-snug">
+              Join the Global <br />
+              <span class="gold-gradient-text">Dining Circle</span>
+            </h2>
+            <p class="text-xs sm:text-sm text-[#a1a1aa] font-light leading-relaxed">
+              Unlock priority access to 3-Star Michelin tables, private chef omakase counters, and 24/7 dedicated concierge table orchestration.
+            </p>
+          </div>
+
+          <!-- Membership Card Preview -->
+          <div class="rounded-2xl border border-amber-500/30 bg-gradient-to-br from-[#1d2030] to-[#12141e] p-5 shadow-lg relative overflow-hidden">
+            <div class="flex items-center justify-between">
+              <span id="card-pass-label" class="text-[10px] uppercase tracking-[0.2em] text-amber-400 font-bold">GOLD CONNOISSEUR PASS</span>
+              <svg viewBox="398 82 212 290" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0"><path fill="#fcd34d" d="M419.713867,256.179962 C408.001251,235.739304 410.215973,215.613876 419.889709,195.679504 C426.373138,182.319229 436.255493,171.444672 446.508270,160.904480 C457.075165,150.041229 468.783997,140.348602 478.792694,128.896606 C487.411407,119.035004 494.797852,108.464394 500.031921,96.425682 C500.738983,94.799370 501.001617,92.854477 502.785980,91.712807 C503.214905,91.838028 503.879059,91.821617 504.103485,92.127670 C514.526489,106.341171 522.003967,121.483376 518.287415,139.859406 C515.933533,151.498276 508.987885,160.308563 500.296600,167.942245 C487.788574,178.928223 473.634369,187.949692 462.046570,200.037262 C456.219025,206.116135 451.191589,212.659836 449.149933,221.054688 C445.376373,236.570572 454.272034,249.198563 470.197021,250.779221 C485.241028,252.272446 499.302216,248.880798 512.632202,241.996979 C514.021362,241.279602 515.213196,239.793518 517.062500,240.547546 C517.833252,242.063324 516.690857,242.794266 515.917847,243.562866 C502.480865,256.923462 487.519073,267.973206 468.591339,271.949402 C447.923096,276.291199 431.269562,272.383606 419.713867,256.179962 z"/><path fill="#fcd34d" d="M536.351807,311.352905 C521.089722,325.623138 508.631836,341.451172 501.644409,361.304535 C500.580017,360.856842 499.799347,360.777496 499.458496,360.348633 C491.323975,350.113098 485.458466,338.909088 484.707672,325.531189 C484.034546,313.536499 489.236786,303.909576 496.947052,295.363251 C506.737030,284.511749 519.089050,276.702271 530.329102,267.573334 C539.676453,259.981689 548.930542,252.352356 553.649658,240.719803 C556.247925,234.315125 556.803040,227.722214 555.167542,221.122284 C551.964783,208.197189 539.399353,200.886032 526.174622,203.877502 C513.911682,206.651428 503.242737,212.702515 493.079834,219.823700 C492.039246,220.552856 491.267578,221.851700 489.661957,221.557190 C488.659760,220.289383 489.653076,219.345703 490.287292,218.480408 C503.850159,199.976334 521.506714,187.674316 544.321167,183.636948 C574.742554,178.253418 599.437622,199.883118 594.804749,234.346802 C592.539368,251.198425 583.628967,264.794067 572.581299,277.156372 C561.558105,289.491241 548.610413,299.803345 536.351807,311.352905 z"/></svg>
+            </div>
+            <div class="mt-4 font-display text-lg font-bold text-white" id="card-name-preview">Your Name Here</div>
+            <div class="text-[11px] text-[#a1a1aa] font-mono mt-0.5" id="card-role-code">STACKLY-GOLD-MEMBER</div>
+            <div class="mt-4 flex items-center justify-between pt-3 border-t border-[#2a2e42] text-[10px] text-amber-300">
+              <span>Stackly Worldwide</span>
+              <span>Issued Instantly</span>
+            </div>
+          </div>
+
+          <!-- Perks List -->
+          <div class="space-y-2.5 pt-2">
+            <div class="flex items-center gap-2.5 text-xs text-[#d4d4d8]">
+              <i data-lucide="check-circle-2" class="h-4 w-4 text-amber-400 shrink-0"></i>
+              <span>Direct Chef Allotments (No bot competition)</span>
+            </div>
+            <div class="flex items-center gap-2.5 text-xs text-[#d4d4d8]">
+              <i data-lucide="check-circle-2" class="h-4 w-4 text-amber-400 shrink-0"></i>
+              <span>Sommelier Pre-Decanting of Grand Cru bottles</span>
+            </div>
+            <div class="flex items-center gap-2.5 text-xs text-[#d4d4d8]">
+              <i data-lucide="check-circle-2" class="h-4 w-4 text-amber-400 shrink-0"></i>
+              <span>Discreet Backdoor Access for high-profile patrons</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 pt-6 border-t border-[#1f2230] text-[11px] text-[#71717a]">
+          <span>Stackly Reserve Charter Enforced • Zero Secondary Reselling</span>
+        </div>
+      </div>
+
+      <!-- Right Side: Registration Form -->
+      <div class="lg:col-span-7 rounded-3xl border border-[#272a3b] bg-[#12141e]/95 p-8 sm:p-10 backdrop-blur-2xl shadow-2xl flex flex-col justify-between">
+        <div>
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#222534] pb-6">
+            <div>
+              <h1 class="font-display text-2xl font-bold text-white">VIP Membership Application</h1>
+              <p class="text-xs text-[#a1a1aa] mt-1">Select your registration profile type</p>
+            </div>
+
+            <!-- Role Switcher -->
+            <div class="flex items-center rounded-2xl bg-[#0c0d12] p-1 border border-[#272a38]">
+              <button type="button" id="signup-role-client" onclick="setSignupRole('client')" class="flex items-center gap-2 rounded-xl px-3 py-1.5 text-xs font-medium transition-all bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-sm">
+                <i data-lucide="crown" class="h-3.5 w-3.5 text-amber-400"></i>
+                <span>Diner Circle</span>
+              </button>
+              <button type="button" id="signup-role-admin" onclick="setSignupRole('admin')" class="flex items-center gap-2 rounded-xl px-3 py-1.5 text-xs font-medium transition-all text-[#a1a1aa] hover:text-white">
+                <i data-lucide="chef-hat" class="h-3.5 w-3.5 text-amber-400"></i>
+                <span>Restaurant Admin</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Registration Inputs -->
+          <form onsubmit="handleSignupSubmit(event)" class="mt-6 space-y-4">
+            <!-- Full Name -->
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-[#a1a1aa] mb-1.5">Full Name &amp; Title</label>
+              <div class="relative">
+                <i data-lucide="user" class="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[#71717a]"></i>
+                <input type="text" id="signup-fullname" required placeholder="e.g. Lord Alexander Sterling" oninput="updateCardPreview()"
+                  class="w-full rounded-2xl border border-[#2b2e40] bg-[#161826] pl-11 pr-4 py-3 text-sm text-white placeholder-[#71717a] focus:border-amber-400 focus:outline-none transition-colors" />
+              </div>
+            </div>
+
+            <!-- Email & Phone -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-[#a1a1aa] mb-1.5">Email Address</label>
+                <div class="relative">
+                  <i data-lucide="mail" class="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[#71717a]"></i>
+                  <input type="email" id="signup-email" required placeholder="vip@domain.com"
+                    class="w-full rounded-2xl border border-[#2b2e40] bg-[#161826] pl-11 pr-4 py-3 text-sm text-white placeholder-[#71717a] focus:border-amber-400 focus:outline-none transition-colors" />
+                </div>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-[#a1a1aa] mb-1.5">Phone Number (SMS Passes)</label>
+                <div class="relative">
+                  <i data-lucide="phone" class="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[#71717a]"></i>
+                  <input type="tel" id="signup-phone" placeholder="+1 (555) 000-0000"
+                    class="w-full rounded-2xl border border-[#2b2e40] bg-[#161826] pl-11 pr-4 py-3 text-sm text-white placeholder-[#71717a] focus:border-amber-400 focus:outline-none transition-colors" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Password -->
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-[#a1a1aa] mb-1.5">Create Password</label>
+              <div class="relative">
+                <i data-lucide="lock" class="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[#71717a]"></i>
+                <input type="password" id="signup-password" required placeholder="Minimum 8 characters"
+                  class="w-full rounded-2xl border border-[#2b2e40] bg-[#161826] pl-11 pr-4 py-3 text-sm text-white placeholder-[#71717a] focus:border-amber-400 focus:outline-none transition-colors" />
+              </div>
+            </div>
+
+            <!-- Conditional Field -->
+            <div id="signup-conditional-client">
+              <label class="block text-xs font-semibold uppercase tracking-wider text-[#a1a1aa] mb-1.5">Dietary Nuances &amp; Cellar Preferences (Optional)</label>
+              <div class="relative">
+                <i data-lucide="wine" class="absolute left-4 top-3 h-4 w-4 text-[#71717a]"></i>
+                <textarea id="signup-dietary" rows="2" placeholder="e.g. Pescatarian, Truffle tasting lover, French Burgundy Grand Cru collector"
+                  class="w-full rounded-2xl border border-[#2b2e40] bg-[#161826] pl-11 pr-4 py-2.5 text-xs text-white placeholder-[#71717a] focus:border-amber-400 focus:outline-none transition-colors resize-none"></textarea>
+              </div>
+            </div>
+
+            <div id="signup-conditional-admin" class="hidden">
+              <label class="block text-xs font-semibold uppercase tracking-wider text-[#a1a1aa] mb-1.5">Restaurant / Hospitality Group</label>
+              <div class="relative">
+                <i data-lucide="building" class="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[#71717a]"></i>
+                <input type="text" id="signup-restaurant" placeholder="e.g. L'Aura Élégante, Le Gabriel Paris"
+                  class="w-full rounded-2xl border border-[#2b2e40] bg-[#161826] pl-11 pr-4 py-3 text-sm text-white placeholder-[#71717a] focus:border-amber-400 focus:outline-none transition-colors" />
+              </div>
+            </div>
+
+            <!-- Terms Agreement -->
+            <div class="flex items-start gap-2.5 pt-1 text-xs text-[#a1a1aa]">
+              <input type="checkbox" id="terms-checkbox" checked class="h-4 w-4 rounded border-[#323648] bg-[#161826] text-amber-500 focus:ring-0 cursor-pointer accent-amber-500 mt-0.5" />
+              <label for="terms-checkbox" class="cursor-pointer select-none leading-relaxed text-[11px]">
+                I agree to the Stackly Reserve Code of Conduct, Punctual Seating Protocol, and Guaranteed Allotment Terms.
+              </label>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" id="signup-submit-btn" class="w-full mt-3 flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 py-3.5 text-sm font-bold text-black shadow-[0_0_25px_rgba(212,175,55,0.25)] hover:brightness-110 active:scale-[0.99] transition-all cursor-pointer">
+              <span>Complete VIP Registration</span>
+              <i data-lucide="arrow-right" class="h-4 w-4"></i>
+            </button>
+          </form>
+        </div>
+
+        <!-- Bottom Link to Login -->
+        <div class="mt-6 pt-4 border-t border-[#222534] text-center text-xs text-[#a1a1aa]">
+          <span>Already a verified dining member? </span>
+          <a href="login.html" class="font-semibold text-amber-400 hover:text-amber-300 hover:underline transition-colors ml-1 cursor-pointer">Sign In to Your Account</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- 3. SIGNUP FOOTER BAR -->
+  <footer class="relative z-10 border-t border-[#1c1f2e] bg-[#0c0d12] px-4 py-3 text-center text-[11px] text-[#71717a]">
+    <span>© <span id="signup-footer-year"></span> Stackly Reserve Hospitality Consortium. All Rights Reserved.</span>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.getElementById('signup-footer-year').textContent = new Date().getFullYear();
+
+    let signupRole = 'client';
+
+    function setSignupRole(role) {
+      signupRole = role;
+      const clientBtn = document.getElementById('signup-role-client');
+      const adminBtn = document.getElementById('signup-role-admin');
+      const clientField = document.getElementById('signup-conditional-client');
+      const adminField = document.getElementById('signup-conditional-admin');
+      const passLabel = document.getElementById('card-pass-label');
+      const roleCode = document.getElementById('card-role-code');
+
+      if (role === 'client') {
+        clientBtn.className = 'flex items-center gap-2 rounded-xl px-3 py-1.5 text-xs font-medium transition-all bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-sm';
+        adminBtn.className = 'flex items-center gap-2 rounded-xl px-3 py-1.5 text-xs font-medium transition-all text-[#a1a1aa] hover:text-white';
+        clientField.classList.remove('hidden');
+        adminField.classList.add('hidden');
+        passLabel.textContent = 'GOLD CONNOISSEUR PASS';
+        roleCode.textContent = 'STACKLY-GOLD-MEMBER';
+      } else {
+        adminBtn.className = 'flex items-center gap-2 rounded-xl px-3 py-1.5 text-xs font-medium transition-all bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-sm';
+        clientBtn.className = 'flex items-center gap-2 rounded-xl px-3 py-1.5 text-xs font-medium transition-all text-[#a1a1aa] hover:text-white';
+        clientField.classList.add('hidden');
+        adminField.classList.remove('hidden');
+        passLabel.textContent = 'OPERATIONS DIRECTOR PASS';
+        roleCode.textContent = 'STACKLY-OPS-DIRECTOR';
+      }
+    }
+
+    function updateCardPreview() {
+      const name = document.getElementById('signup-fullname').value;
+      document.getElementById('card-name-preview').textContent = name || 'Your Name Here';
+    }
+
+    function handleSignupSubmit(e) {
+      e.preventDefault();
+      const fullName = document.getElementById('signup-fullname').value.trim();
+      const email = document.getElementById('signup-email').value.trim();
+      const phone = document.getElementById('signup-phone').value.trim();
+      const password = document.getElementById('signup-password').value;
+      const termsAccepted = document.getElementById('terms-checkbox').checked;
+
+      if (!fullName || !email || !password) {
+        store.showToast('Form Incomplete', 'Please fill in all required membership details.', 'info');
+        return;
+      }
+      if (!termsAccepted) {
+        store.showToast('Terms Required', 'Please accept the Stackly Reserve Private Dining charter.', 'info');
+        return;
+      }
+
+      const btn = document.getElementById('signup-submit-btn');
+      btn.disabled = true;
+      btn.innerHTML = '<div class="flex items-center gap-2"><div class="h-4 w-4 border-2 border-black border-t-transparent rounded-full animate-spin"></div><span>Issuing Digital Pass...</span></div>';
+
+      setTimeout(() => {
+        store.login(email, signupRole, fullName);
+        if (window.confetti) confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 }, colors: ['#d4af37', '#f5c518', '#fff'] });
+        store.showToast('Membership Granted!', `Welcome, ${fullName}! Your VIP dining pass has been issued.`, 'gold');
+        setTimeout(() => {
+          window.location.href = signupRole === 'admin' ? 'admin-dashboard.html' : 'client-profile.html';
+        }, 800);
+      }, 600);
+    }
+
+    if (window.lucide) window.lucide.createIcons();
+  </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 - Page Not Found | Stackly Fine Dining Platform</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Cormorant Garamond', 'Georgia', 'serif'],
+            display: ['Cinzel', 'serif'],
+            sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-[#0a0b0f] text-[#f3f4f6] antialiased selection:bg-amber-400 selection:text-black min-h-screen flex flex-col items-center justify-center p-6 text-center">
+
+  <div class="max-w-md space-y-6 luxury-glass p-10 rounded-3xl border border-amber-500/30 shadow-2xl">
+    <span class="font-display text-7xl font-extrabold gold-gradient-text">404</span>
+    <h2 class="font-display text-2xl font-bold text-stone-100">Dining Sanctuary Not Found</h2>
+    <p class="text-xs text-stone-400 leading-relaxed">
+      The gastronomic destination or private allocation you requested has been relocated or reserved by another connoisseur.
+    </p>
+
+    <div class="pt-4 flex flex-col gap-3">
+      <a href="index.html" class="w-full py-3 rounded-xl bg-gradient-to-r from-amber-400 to-amber-600 text-stone-950 font-extrabold text-xs uppercase tracking-widest hover:brightness-110 shadow-lg shadow-amber-500/25">
+        Return to Home Salon
+      </a>
+      <a href="restaurants.html" class="w-full py-3 rounded-xl bg-stone-900 border border-stone-800 text-stone-300 text-xs font-bold hover:text-white">
+        Explore Restaurant Catalog
+      </a>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
