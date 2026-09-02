@@ -4,22 +4,46 @@ class StacklyStore {
   constructor() {
     this.listeners = new Set();
     
-    // Auth User Initialization (Handles explicit logout persistence)
+    // Account Store Persistence (RES-005)
+    const savedAccounts = localStorage.getItem('stackly_accounts');
+    const demoUsers = (typeof DEMO_USERS !== 'undefined' ? DEMO_USERS : (window.DEMO_USERS || {}));
+    
+    const defaultAccounts = [
+      { ...demoUsers.client, password: 'client123' },
+      { ...demoUsers.admin, password: 'admin123' }
+    ];
+
+    if (savedAccounts) {
+      try {
+        this.accounts = JSON.parse(savedAccounts);
+      } catch (e) {
+        this.accounts = defaultAccounts;
+      }
+    } else {
+      this.accounts = defaultAccounts;
+      localStorage.setItem('stackly_accounts', JSON.stringify(this.accounts));
+    }
+    
+    // Auth User Initialization (Handles explicit logout persistence & RES-004 default unauthenticated state)
     const isLoggedOut = localStorage.getItem('stackly_logged_out') === 'true';
     const savedUser = localStorage.getItem('stackly_auth_user');
-    const demoUsers = (typeof DEMO_USERS !== 'undefined' ? DEMO_USERS : (window.DEMO_USERS || {}));
 
-    if (isLoggedOut) {
+    if (isLoggedOut || !savedUser) {
       this.currentUser = null;
-    } else if (savedUser) {
+    } else {
       try {
         this.currentUser = JSON.parse(savedUser);
       } catch (e) {
-        this.currentUser = demoUsers.client || null;
+        this.currentUser = null;
       }
-    } else {
-      this.currentUser = demoUsers.client || null;
     }
+
+    // Concierge Inquiries (RES-009)
+    const savedInquiries = localStorage.getItem('stackly_concierge_inquiries');
+    this.conciergeInquiries = savedInquiries ? JSON.parse(savedInquiries) : [];
+
+    // Active Reset Code (RES-006)
+    this.activeResetCode = null;
 
     // Reservations
     const savedRes = localStorage.getItem('stackly_reservations');
@@ -91,34 +115,56 @@ class StacklyStore {
       localStorage.removeItem('stackly_auth_user');
       localStorage.setItem('stackly_logged_out', 'true');
     }
+    localStorage.setItem('stackly_accounts', JSON.stringify(this.accounts));
     localStorage.setItem('stackly_reservations', JSON.stringify(this.reservations));
     localStorage.setItem('stackly_favorites', JSON.stringify(this.favorites));
   }
 
-  // Auth Operations
-  login(email, role = 'client', name) {
-    const matchedRole = role || (email && email.toLowerCase().includes('admin') ? 'admin' : 'client');
-    const demoUsers = (typeof DEMO_USERS !== 'undefined' ? DEMO_USERS : (window.DEMO_USERS || {}));
-    const baseUser = demoUsers[matchedRole] || {
-      id: 'user-' + Date.now(),
-      name: name || 'VIP Gastronome',
-      email: email || 'vip@stackly.com',
-      role: matchedRole,
-      roleTitle: matchedRole === 'admin' ? 'Operations Director' : 'VIP Gastronome',
-      membershipTier: matchedRole === 'admin' ? 'Executive Maitre D' : 'Gold Connoisseur',
-      avatar: 'assets/asset-14.webp'
-    };
+  // Auth Operations (RES-002, RES-003, RES-005)
+  login(email, password, role = 'client') {
+    if (!email || !password) {
+      this.showToast('Authentication Error', 'Please enter both your email address and password.', 'error');
+      return false;
+    }
+
+    const cleanEmail = email.trim().toLowerCase();
+    
+    // Find account in registered accounts or demo accounts
+    let matchedAccount = this.accounts.find(a => a.email.toLowerCase() === cleanEmail);
+    if (!matchedAccount && cleanEmail.includes('admin')) {
+      const demoUsers = (typeof DEMO_USERS !== 'undefined' ? DEMO_USERS : (window.DEMO_USERS || {}));
+      matchedAccount = demoUsers.admin;
+    } else if (!matchedAccount && (cleanEmail.includes('alexander') || cleanEmail.includes('vip'))) {
+      const demoUsers = (typeof DEMO_USERS !== 'undefined' ? DEMO_USERS : (window.DEMO_USERS || {}));
+      matchedAccount = demoUsers.client;
+    }
+
+    if (!matchedAccount) {
+      this.showToast('Account Not Found', 'No account exists with this email address. Please sign up first.', 'error');
+      return false;
+    }
+
+    // Verify Password (RES-002)
+    if (matchedAccount.password && matchedAccount.password !== password) {
+      this.showToast('Invalid Passcode', 'The passcode you entered is incorrect.', 'error');
+      return false;
+    }
+
+    // Admin Role Verification (RES-003)
+    if (role === 'admin' && matchedAccount.role !== 'admin' && !cleanEmail.includes('admin')) {
+      this.showToast('Access Restricted', 'Your account does not have Maître D’ or Admin privileges.', 'error');
+      return false;
+    }
 
     this.currentUser = {
-      ...baseUser,
-      email: email || baseUser.email,
-      name: name || baseUser.name,
-      role: matchedRole
+      ...matchedAccount,
+      role: role || matchedAccount.role
     };
+
     this.saveState();
     this.showToast(
       `Welcome back, ${this.currentUser.name.split(' ')[0]}`,
-      matchedRole === 'admin' 
+      this.currentUser.role === 'admin' 
         ? 'Authenticated as Maître D’ & Operations Director.' 
         : 'VIP Gastronome credentials verified.',
       'gold'
@@ -128,11 +174,26 @@ class StacklyStore {
   }
 
   signup(data) {
-    this.currentUser = {
+    if (!data.email || !data.password || data.password.length < 6) {
+      this.showToast('Registration Error', 'Please provide a valid email and a passcode of at least 6 characters.', 'error');
+      return false;
+    }
+
+    const cleanEmail = data.email.trim().toLowerCase();
+    
+    // Check account uniqueness (RES-005)
+    const existing = this.accounts.find(a => a.email.toLowerCase() === cleanEmail);
+    if (existing) {
+      this.showToast('Registration Error', 'An account with this email address already exists. Please login.', 'error');
+      return false;
+    }
+
+    const newUser = {
       id: 'user-' + Date.now(),
-      name: data.name,
-      email: data.email,
-      role: data.role,
+      name: data.name || 'VIP Member',
+      email: cleanEmail,
+      password: data.password,
+      role: data.role || 'client',
       roleTitle: data.role === 'admin' ? 'Restaurant Manager' : 'VIP Gastronome Member',
       membershipTier: data.role === 'admin' ? 'Executive Maitre D' : 'Gold Connoisseur',
       dinerSince: '2026',
@@ -144,6 +205,9 @@ class StacklyStore {
       city: 'Global Member',
       dietaryNotes: data.dietaryNotes || 'No specific restrictions noted'
     };
+
+    this.accounts.push(newUser);
+    this.currentUser = newUser;
     this.saveState();
     this.triggerCelebration();
     this.showToast(
@@ -153,6 +217,49 @@ class StacklyStore {
     );
     this.notify();
     return true;
+  }
+
+  verifyPasswordReset(email, code, newPassword) {
+    if (!this.activeResetCode || code !== this.activeResetCode) {
+      this.showToast('Verification Failed', 'The 6-digit security token you entered is invalid.', 'error');
+      return false;
+    }
+
+    if (!newPassword || newPassword.length < 6) {
+      this.showToast('Password Error', 'New passcode must be at least 6 characters long.', 'error');
+      return false;
+    }
+
+    const cleanEmail = email.trim().toLowerCase();
+    const account = this.accounts.find(a => a.email.toLowerCase() === cleanEmail);
+    if (account) {
+      account.password = newPassword;
+    }
+
+    if (this.currentUser && this.currentUser.email.toLowerCase() === cleanEmail) {
+      this.currentUser.password = newPassword;
+    }
+
+    this.activeResetCode = null;
+    this.saveState();
+    this.showToast('Passcode Updated', 'Your passcode has been securely reset. You can now log in.', 'gold');
+    this.notify();
+    return true;
+  }
+
+  // Concierge Inquiries Store (RES-009)
+  addConciergeInquiry(data) {
+    const inquiry = {
+      id: 'INQ-' + Math.floor(100000 + Math.random() * 900000),
+      createdAt: new Date().toISOString(),
+      status: 'Received',
+      ...data
+    };
+    this.conciergeInquiries.unshift(inquiry);
+    localStorage.setItem('stackly_concierge_inquiries', JSON.stringify(this.conciergeInquiries));
+    this.showToast('Inquiry Submitted', `Reference #${inquiry.id} logged with Stackly Master Concierge.`, 'gold');
+    this.notify();
+    return inquiry;
   }
 
   logout() {

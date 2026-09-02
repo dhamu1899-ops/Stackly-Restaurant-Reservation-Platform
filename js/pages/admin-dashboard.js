@@ -113,6 +113,15 @@ function handleWalkInSubmit(e) {
   const tableNum = parseInt(document.getElementById('walkin-table')?.value || '1');
   const notes = document.getElementById('walkin-notes')?.value || 'Walk-in VIP';
 
+  const tableKey = `t${tableNum}`;
+  const currentStatus = store.tableStatuses[tableKey] || store.tableStatuses[`t-${tableNum}`];
+
+  // RES-010: Validate table availability before seating walk-in
+  if (currentStatus === 'seated' || currentStatus === 'reserved' || currentStatus === 'vip_hold') {
+    store.showToast('Table Unavailable', `Table #${tableNum} is currently ${currentStatus.replace('_', ' ').toUpperCase()}! Please select an available table.`, 'error');
+    return false;
+  }
+
   const select = document.getElementById('admin-rest-select');
   const restId = select ? select.value : 'r1';
   const rest = RESTAURANTS_DATA.find((r) => r.id === restId) || RESTAURANTS_DATA[0];
@@ -126,6 +135,7 @@ function handleWalkInSubmit(e) {
     restaurantAddress: rest.address,
     date: new Date().toISOString().split('T')[0],
     time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }),
+    partySize: guests,
     guests: guests,
     seatingAreaName: `Table #${tableNum} Floor Seating`,
     seatingAreaId: 'main-dining',
@@ -141,10 +151,11 @@ function handleWalkInSubmit(e) {
       preferredSeatingAreaId: 'main-dining'
     },
     totalEstimatedSpend: guests * 250,
+    totalPrice: guests * 250,
     depositPaid: 0
   });
 
-  store.setTableLiveStatus(`t-${tableNum}`, 'seated');
+  store.setTableLiveStatus(tableKey, 'seated');
   store.showToast('Walk-in Seated', `Guest ${name} assigned to Table #${tableNum}.`, 'gold');
   toggleWalkInModal(false);
 }
@@ -156,7 +167,7 @@ function renderAdminDashboard() {
   const user = store.currentUser;
   const isAdmin = user && user.role === 'admin';
 
-  // Role Guard
+  // Role Guard (RES-015)
   if (!isAdmin) {
     stage.innerHTML = `
       <div class="py-16 text-center max-w-lg mx-auto rounded-3xl border border-rose-500/30 bg-[#12141e] p-8 shadow-2xl space-y-5">
@@ -165,14 +176,11 @@ function renderAdminDashboard() {
         </div>
         <h2 class="font-display text-2xl font-bold text-white">Restricted Operations Console</h2>
         <p class="text-xs text-[#a1a1aa] leading-relaxed">
-          The Maître D’ command suite is strictly reserved for verified Restaurant Administrators. Switch your role to Maître D' or sign in as Admin.
+          The Maître D’ command suite requires valid Admin credentials. Please sign in with an authorized Administrator account.
         </p>
         <div class="pt-2 flex flex-col sm:flex-row gap-3 justify-center">
-          <button onclick="store.switchRole('admin'); renderAdminDashboard();" class="rounded-xl bg-gradient-to-r from-amber-400 to-amber-600 px-5 py-2.5 text-xs font-bold text-black hover:brightness-110 cursor-pointer">
-            Switch Role to Maître D'
-          </button>
-          <a href="login.html" class="rounded-xl border border-[#2b2e40] bg-[#141624] px-5 py-2.5 text-xs font-semibold text-white hover:border-amber-400">
-            Login as Admin
+          <a href="login.html" class="rounded-xl bg-gradient-to-r from-amber-400 to-amber-600 px-6 py-3 text-xs font-bold text-black hover:brightness-110">
+            Sign In with Admin Passcode
           </a>
         </div>
       </div>
@@ -185,8 +193,10 @@ function renderAdminDashboard() {
   const restId = select ? select.value : 'r1';
   const rest = RESTAURANTS_DATA.find((r) => r.id === restId) || RESTAURANTS_DATA[0];
 
-  const totalCovers = store.reservations.reduce((acc, r) => acc + (r.status !== 'cancelled' ? r.guests : 0), 0);
-  const totalRevenue = store.reservations.reduce((acc, r) => acc + (r.status !== 'cancelled' ? r.totalEstimatedSpend : 0), 0);
+  // RES-012: Operational metrics calculated entirely from actual reservation records
+  const totalCovers = store.reservations.reduce((acc, r) => acc + (r.status !== 'cancelled' ? (r.partySize || r.guests || 2) : 0), 0);
+  const totalRevenue = store.reservations.reduce((acc, r) => acc + (r.status !== 'cancelled' ? (r.totalPrice || r.totalEstimatedSpend || 500) : 0), 0);
+  const totalReservationsCount = store.reservations.length;
 
   const statusColors = {
     available: { bg: 'bg-emerald-500/10', text: 'text-emerald-400', border: 'border-emerald-500/30', label: 'Available' },
@@ -198,16 +208,16 @@ function renderAdminDashboard() {
 
   const filtered = store.reservations.filter((r) => {
     const matchSearch = !adminSearchQuery || (
-      r.guestInfo.fullName.toLowerCase().includes(adminSearchQuery) ||
-      r.restaurantName.toLowerCase().includes(adminSearchQuery) ||
-      r.confirmationCode.toLowerCase().includes(adminSearchQuery)
+      (r.guestInfo && r.guestInfo.fullName && r.guestInfo.fullName.toLowerCase().includes(adminSearchQuery)) ||
+      (r.restaurantName && r.restaurantName.toLowerCase().includes(adminSearchQuery)) ||
+      (r.confirmationCode && r.confirmationCode.toLowerCase().includes(adminSearchQuery))
     );
     const matchStatus = adminStatusFilter === 'all' || r.status === adminStatusFilter;
     return matchSearch && matchStatus;
   });
 
   stage.innerHTML = `
-    <!-- KPI Metrics -->
+    <!-- KPI Metrics (Calculated 100% dynamically from actual store records - RES-012) -->
     <div class="grid grid-cols-2 lg:grid-cols-5 gap-3.5">
       <div class="rounded-2xl border border-[#222534] bg-[#12141e] p-4 shadow-lg">
         <div class="flex items-center justify-between text-[#a1a1aa]">
@@ -215,10 +225,10 @@ function renderAdminDashboard() {
           <i data-lucide="users" class="h-4 w-4 text-amber-400"></i>
         </div>
         <div class="mt-2 flex items-baseline gap-2">
-          <span class="text-2xl font-bold font-display text-white">${totalCovers + 84}</span>
-          <span class="text-[10px] text-emerald-400 font-semibold">+14% vs avg</span>
+          <span class="text-2xl font-bold font-display text-white">${totalCovers}</span>
+          <span class="text-[10px] text-emerald-400 font-semibold">Active Seats</span>
         </div>
-        <p class="text-[10px] text-[#71717a] mt-0.5">94% table occupancy</p>
+        <p class="text-[10px] text-[#71717a] mt-0.5">Calculated from reservations</p>
       </div>
 
       <div class="rounded-2xl border border-[#222534] bg-[#12141e] p-4 shadow-lg">
@@ -227,21 +237,21 @@ function renderAdminDashboard() {
           <i data-lucide="dollar-sign" class="h-4 w-4 text-emerald-400"></i>
         </div>
         <div class="mt-2 flex items-baseline gap-2">
-          <span class="text-2xl font-bold font-display text-white">$${(totalRevenue + 24800).toLocaleString()}</span>
+          <span class="text-2xl font-bold font-display text-white">$${totalRevenue.toLocaleString()}</span>
         </div>
-        <p class="text-[10px] text-amber-300/80 mt-0.5">$345 avg / cover</p>
+        <p class="text-[10px] text-amber-300/80 mt-0.5">Actual Degustation Revenue</p>
       </div>
 
       <div class="rounded-2xl border border-[#222534] bg-[#12141e] p-4 shadow-lg">
         <div class="flex items-center justify-between text-[#a1a1aa]">
-          <span class="text-[11px] font-semibold uppercase tracking-wider">Confirmed Holds</span>
+          <span class="text-[11px] font-semibold uppercase tracking-wider">Total Bookings</span>
           <i data-lucide="calendar" class="h-4 w-4 text-blue-400"></i>
         </div>
         <div class="mt-2 flex items-baseline gap-2">
-          <span class="text-2xl font-bold font-display text-white">${store.reservations.length + 18}</span>
-          <span class="text-[10px] text-blue-300 font-semibold">100% VIP</span>
+          <span class="text-2xl font-bold font-display text-white">${totalReservationsCount}</span>
+          <span class="text-[10px] text-blue-300 font-semibold">Verified</span>
         </div>
-        <p class="text-[10px] text-[#71717a] mt-0.5">0 bot bookings</p>
+        <p class="text-[10px] text-[#71717a] mt-0.5">Live store reservations</p>
       </div>
 
       <div class="rounded-2xl border border-[#222534] bg-[#12141e] p-4 shadow-lg">

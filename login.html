@@ -367,20 +367,28 @@
     function handleLoginSubmit(e) {
       e.preventDefault();
       const email = document.getElementById('login-email-input').value.trim();
-      if (!email) {
-        store.showToast('Authentication Error', 'Please enter your registered email address.', 'info');
+      const password = document.getElementById('login-password-input').value;
+
+      if (!email || !password) {
+        store.showToast('Authentication Error', 'Please enter both your registered email address and passcode.', 'error');
         return;
       }
+
       const btn = document.getElementById('login-submit-btn');
       btn.disabled = true;
       btn.innerHTML = '<div class="flex items-center gap-2"><div class="h-4 w-4 border-2 border-black border-t-transparent rounded-full animate-spin"></div><span>Authenticating Credentials...</span></div>';
 
       setTimeout(() => {
-        const nameFromEmail = email.split('@')[0].replace(/[._]/g, ' ').split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-        store.login(email, selectedLoginRole, nameFromEmail);
-        setTimeout(() => {
-          window.location.href = selectedLoginRole === 'admin' ? 'admin-dashboard.html' : 'client-profile.html';
-        }, 300);
+        const success = store.login(email, password, selectedLoginRole);
+        btn.disabled = false;
+        btn.innerHTML = `<span id="login-btn-text">${selectedLoginRole === 'admin' ? "Enter Maître D' Command Room" : "Enter VIP Patron Suite"}</span><i data-lucide="arrow-right" class="h-4 w-4"></i>`;
+        if (window.lucide) window.lucide.createIcons();
+
+        if (success) {
+          setTimeout(() => {
+            window.location.href = selectedLoginRole === 'admin' ? 'admin-dashboard.html' : 'client-profile.html';
+          }, 300);
+        }
       }, 500);
     }
 
@@ -409,37 +417,43 @@
       e.preventDefault();
       const resetEmail = document.getElementById('reset-email-input').value.trim();
       if (!resetEmail || !resetEmail.includes('@')) {
-        store.showToast('Invalid Email', 'Please provide a valid registered email address.', 'info');
+        store.showToast('Invalid Email', 'Please provide a valid registered email address.', 'error');
         return;
       }
       const code = Math.floor(100000 + Math.random() * 900000).toString();
       generatedResetCode = code;
+      store.activeResetCode = code;
       document.getElementById('reset-email-display').textContent = resetEmail;
-      document.getElementById('generated-code-display').textContent = 'Code: ' + code;
-      document.getElementById('recovery-code-input').value = code;
+      document.getElementById('generated-code-display').textContent = 'Security Code Dispatched';
+      document.getElementById('recovery-code-input').value = ''; // RES-006: Require manual 6-digit verification code entry
       showForgotStep('verify');
-      store.showToast('Recovery Token Dispatched', `An encrypted 6-digit recovery code (${code}) has been prepared for ${resetEmail}.`, 'gold');
+      store.showToast('Recovery Code Generated', `Security Token dispatched: ${code}`, 'gold');
     }
 
     function handleVerifyReset(e) {
       e.preventDefault();
+      const resetEmail = document.getElementById('reset-email-input').value.trim();
       const code = document.getElementById('recovery-code-input').value.trim();
       const newPwd = document.getElementById('new-password-input').value;
       const confirmPwd = document.getElementById('confirm-password-input').value;
-      if (!code || code.length < 4) {
-        store.showToast('Verification Required', 'Please enter your 6-digit security token.', 'info');
+
+      if (!code || code !== generatedResetCode) {
+        store.showToast('Verification Failed', 'The 6-digit security token you entered is invalid.', 'error');
         return;
       }
       if (!newPwd || newPwd.length < 6) {
-        store.showToast('Weak Password', 'New passcode must be at least 6 characters.', 'info');
+        store.showToast('Weak Password', 'New passcode must be at least 6 characters long.', 'error');
         return;
       }
       if (newPwd !== confirmPwd) {
-        store.showToast('Passcode Mismatch', 'The two passcodes entered do not match.', 'info');
+        store.showToast('Passcode Mismatch', 'The two passcodes entered do not match.', 'error');
         return;
       }
-      showForgotStep('success');
-      store.showToast('Passcode Successfully Reset', 'Your account vault has been updated with your new confidential passcode.', 'gold');
+
+      const success = store.verifyPasswordReset(resetEmail, code, newPwd); // RES-007: Updates account password
+      if (success) {
+        showForgotStep('success');
+      }
     }
 
     if (window.lucide) window.lucide.createIcons();

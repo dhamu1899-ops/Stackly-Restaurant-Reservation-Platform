@@ -682,23 +682,23 @@ function renderFooter() {
               </span>
               <div class="flex items-center gap-2">
                 <!-- X (Twitter) -->
-                <a href="https://x.com" target="_blank" rel="noopener noreferrer" onclick="event.preventDefault(); store.showToast('X Connected', 'Opening Stackly\'s official X portal (@StacklyReserve).', 'gold');" class="group relative flex h-9 w-9 items-center justify-center rounded-xl border border-[#272a38] bg-[#12141e] text-[#a1a1aa] hover:border-amber-400/50 hover:bg-amber-500/10 hover:text-amber-300 transition-all duration-200 shadow-sm" title="X - @StacklyReserve">
+                <a href="https://x.com/stacklyreserve" target="_blank" rel="noopener noreferrer" onclick="event.preventDefault(); store.showToast('X Connected', 'Opening Stackly\'s official X portal (@StacklyReserve).', 'gold');" class="group relative flex h-9 w-9 items-center justify-center rounded-xl border border-[#272a38] bg-[#12141e] text-[#a1a1aa] hover:border-amber-400/50 hover:bg-amber-500/10 hover:text-amber-300 transition-all duration-200 shadow-sm" title="X - @StacklyReserve">
                   <svg viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4 transition-transform group-hover:scale-110"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                 </a>
                 <!-- Instagram -->
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" onclick="event.preventDefault(); store.showToast('Instagram Connected', 'Opening Stackly\'s official Instagram portal (@stacklyreserve).', 'gold');" class="group relative flex h-9 w-9 items-center justify-center rounded-xl border border-[#272a38] bg-[#12141e] text-[#a1a1aa] hover:border-amber-400/50 hover:bg-amber-500/10 hover:text-amber-300 transition-all duration-200 shadow-sm" title="Instagram - @stacklyreserve">
+                <a href="https://instagram.com/stacklyreserve" target="_blank" rel="noopener noreferrer" onclick="event.preventDefault(); store.showToast('Instagram Connected', 'Opening Stackly\'s official Instagram portal (@stacklyreserve).', 'gold');" class="group relative flex h-9 w-9 items-center justify-center rounded-xl border border-[#272a38] bg-[#12141e] text-[#a1a1aa] hover:border-amber-400/50 hover:bg-amber-500/10 hover:text-amber-300 transition-all duration-200 shadow-sm" title="Instagram - @stacklyreserve">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 transition-transform group-hover:scale-110"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
                 </a>
                 <!-- LinkedIn -->
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" onclick="event.preventDefault(); store.showToast('LinkedIn Connected', 'Opening Stackly\'s official LinkedIn portal (Stackly Reserve Gastronomy).', 'gold');" class="group relative flex h-9 w-9 items-center justify-center rounded-xl border border-[#272a38] bg-[#12141e] text-[#a1a1aa] hover:border-amber-400/50 hover:bg-amber-500/10 hover:text-amber-300 transition-all duration-200 shadow-sm" title="LinkedIn - Stackly Reserve Gastronomy">
-                  <svg viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4 transition-transform group-hover:scale-110"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.74c-.95 0-1.72.77-1.72 1.72 0 .95.77 1.72 1.72 1.72.95 0 1.72-.77 1.72-1.72 0-.95-.77-1.72-1.72-1.72z"/></svg>
+                <a href="https://linkedin.com/company/stackly-reserve" target="_blank" rel="noopener noreferrer" onclick="event.preventDefault(); store.showToast('LinkedIn Connected', 'Opening Stackly\'s official LinkedIn portal.', 'gold');" class="group relative flex h-9 w-9 items-center justify-center rounded-xl border border-[#272a38] bg-[#12141e] text-[#a1a1aa] hover:border-amber-400/50 hover:bg-amber-500/10 hover:text-amber-300 transition-all duration-200 shadow-sm" title="LinkedIn - Stackly Reserve">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4 transition-transform group-hover:scale-110"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.7a1.63 1.63 0 1 0 0 3.26 1.63 1.63 0 0 0 0-3.26z"/></svg>
                 </a>
                 <!-- YouTube -->
-                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" onclick="event.preventDefault(); store.showToast('YouTube Connected', 'Opening Stackly\'s official YouTube portal (Stackly Culinary Cinema).', 'gold');" class="group relative flex h-9 w-9 items-center justify-center rounded-xl border border-[#272a38] bg-[#12141e] text-[#a1a1aa] hover:border-amber-400/50 hover:bg-amber-500/10 hover:text-amber-300 transition-all duration-200 shadow-sm" title="YouTube - Stackly Culinary Cinema">
+                <a href="https://youtube.com/@stacklyreserve" target="_blank" rel="noopener noreferrer" onclick="event.preventDefault(); store.showToast('YouTube Connected', 'Opening Stackly\'s official YouTube portal (Stackly Culinary Cinema).', 'gold');" class="group relative flex h-9 w-9 items-center justify-center rounded-xl border border-[#272a38] bg-[#12141e] text-[#a1a1aa] hover:border-amber-400/50 hover:bg-amber-500/10 hover:text-amber-300 transition-all duration-200 shadow-sm" title="YouTube - Stackly Culinary Cinema">
                   <svg viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4 transition-transform group-hover:scale-110"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
                 </a>
                 <!-- Facebook -->
-                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" onclick="event.preventDefault(); store.showToast('Facebook Connected', 'Opening Stackly\'s official Facebook portal (Stackly Reserve).', 'gold');" class="group relative flex h-9 w-9 items-center justify-center rounded-xl border border-[#272a38] bg-[#12141e] text-[#a1a1aa] hover:border-amber-400/50 hover:bg-amber-500/10 hover:text-amber-300 transition-all duration-200 shadow-sm" title="Facebook - Stackly Reserve">
+                <a href="https://facebook.com/stacklyreserve" target="_blank" rel="noopener noreferrer" onclick="event.preventDefault(); store.showToast('Facebook Connected', 'Opening Stackly\'s official Facebook portal (Stackly Reserve).', 'gold');" class="group relative flex h-9 w-9 items-center justify-center rounded-xl border border-[#272a38] bg-[#12141e] text-[#a1a1aa] hover:border-amber-400/50 hover:bg-amber-500/10 hover:text-amber-300 transition-all duration-200 shadow-sm" title="Facebook - Stackly Reserve">
                   <svg viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4 transition-transform group-hover:scale-110"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                 </a>
               </div>
@@ -740,7 +740,6 @@ function renderFooter() {
               <li><a href="signup.html" class="text-[#8c8f9f] hover:text-amber-300 transition-colors">Apply for Membership</a></li>
               <li><a href="admin-dashboard.html" class="text-[#8c8f9f] hover:text-amber-300 transition-colors">Maître D’ Command Room</a></li>
               <li><a href="client-profile.html" class="text-[#8c8f9f] hover:text-amber-300 transition-colors">VIP Member Passport</a></li>
-              <li><a href="404.html" class="text-[#8c8f9f] hover:text-amber-300 transition-colors">404 Error Preview</a></li>
             </ul>
           </div>
         </div>
@@ -916,4 +915,184 @@ function renderCommandSearchModal(query = '') {
   if (window.lucide) window.lucide.createIcons();
   const input = document.getElementById('cmd-search-input');
   if (input && document.activeElement !== input) input.focus();
+}
+
+// Render Interactive Reservation Booking Modal (RES-001)
+function renderBookingModal() {
+  let container = document.getElementById('booking-modal-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'booking-modal-container';
+    document.body.appendChild(container);
+  }
+
+  if (!store.isBookingModalOpen || !store.bookingModalRestaurant) {
+    container.innerHTML = '';
+    return;
+  }
+
+  const r = store.bookingModalRestaurant;
+  const selectedSlot = store.bookingPreselectedSlot || (r.availableSlots && r.availableSlots[0]) || '7:30 PM';
+  const defaultDate = store.filters.date || new Date(Date.now() + 86400000 * 2).toISOString().split('T')[0];
+
+  container.className = 'fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in';
+  container.innerHTML = `
+    <div class="relative w-full max-w-xl rounded-3xl border border-amber-500/30 bg-gradient-to-b from-[#161824] via-[#10121a] to-[#0a0b10] p-6 sm:p-8 shadow-[0_0_50px_rgba(0,0,0,0.8)] text-white overflow-hidden">
+      <!-- Glow Accent -->
+      <div class="pointer-events-none absolute -top-24 -right-24 h-60 w-60 rounded-full bg-amber-500/15 blur-3xl"></div>
+
+      <!-- Header -->
+      <div class="flex items-center justify-between pb-4 border-b border-[#232636]">
+        <div class="flex items-center gap-3">
+          <img src="${r.heroImage}" alt="${r.name}" class="h-12 w-12 rounded-2xl object-cover border border-amber-500/30 shadow-md" />
+          <div>
+            <div class="flex items-center gap-2">
+              <h3 class="font-display text-lg font-bold text-white">${r.name}</h3>
+              ${r.michelinStars > 0 ? `<span class="text-amber-400 text-xs">★ ${r.michelinStars} Star</span>` : ''}
+            </div>
+            <p class="text-xs text-[#8c8f9f]">${r.cuisine} • ${r.neighborhood}, ${r.city}</p>
+          </div>
+        </div>
+        <button onclick="store.closeBookingModal()" class="rounded-xl border border-[#2b2e40] bg-[#141622] p-2 text-[#71717a] hover:text-white transition-colors cursor-pointer">
+          <i data-lucide="x" class="h-4 w-4"></i>
+        </button>
+      </div>
+
+      <!-- Booking Form -->
+      <form onsubmit="handleBookingFormSubmit(event)" class="mt-6 space-y-4">
+        <input type="hidden" id="modal-rest-id" value="${r.id}" />
+        <input type="hidden" id="modal-rest-name" value="${r.name}" />
+        <input type="hidden" id="modal-rest-city" value="${r.city}" />
+        <input type="hidden" id="modal-rest-price" value="${r.pricePerPerson}" />
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- Date -->
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-[#a1a1aa] mb-1.5">Reservation Date</label>
+            <div class="relative">
+              <i data-lucide="calendar" class="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-amber-400"></i>
+              <input type="date" id="modal-book-date" required value="${defaultDate}" class="w-full rounded-2xl border border-[#2b2e40] bg-[#161826] pl-10 pr-4 py-3 text-xs text-white focus:border-amber-400 focus:outline-none" />
+            </div>
+          </div>
+
+          <!-- Guests -->
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-[#a1a1aa] mb-1.5">Party Size</label>
+            <div class="relative">
+              <i data-lucide="users" class="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-amber-400"></i>
+              <select id="modal-book-guests" onchange="updateModalPriceDisplay()" class="w-full rounded-2xl border border-[#2b2e40] bg-[#161826] pl-10 pr-4 py-3 text-xs text-white focus:border-amber-400 focus:outline-none cursor-pointer">
+                ${[1,2,3,4,5,6,7,8].map(g => `<option value="${g}" ${g === 2 ? 'selected' : ''}>${g} ${g === 1 ? 'Guest' : 'Guests'}</option>`).join('')}
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Seating Zone -->
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-[#a1a1aa] mb-1.5">Seating Zone Allotment</label>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+            ${(r.seatingZones || [
+              { name: 'Primary Salon', desc: 'Main Dining Floor' },
+              { name: 'Chef Counter', desc: 'Direct Kitchen View' },
+              { name: 'Skyline Terrace', desc: 'Panoramic City Views' }
+            ]).map((zone, idx) => `
+              <label class="flex flex-col p-2.5 rounded-xl border border-[#2b2e40] bg-[#161826] hover:border-amber-400/50 cursor-pointer text-left transition-colors">
+                <div class="flex items-center gap-1.5">
+                  <input type="radio" name="modal-zone" value="${zone.name}" ${idx === 0 ? 'checked' : ''} class="accent-amber-500" />
+                  <span class="text-xs font-bold text-white">${zone.name}</span>
+                </div>
+                <span class="text-[10px] text-[#71717a] mt-0.5 ml-4 truncate">${zone.desc || 'Guaranteed Seating'}</span>
+              </label>
+            `).join('')}
+          </div>
+        </div>
+
+        <!-- Time Slot Selection -->
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-[#a1a1aa] mb-1.5">Available Time Slot</label>
+          <div class="flex flex-wrap gap-2">
+            ${(r.availableSlots || ['5:30 PM', '7:00 PM', '8:30 PM', '9:45 PM']).map(slot => `
+              <label class="cursor-pointer">
+                <input type="radio" name="modal-slot" value="${slot}" ${slot === selectedSlot ? 'checked' : ''} class="peer sr-only" />
+                <span class="inline-block px-3.5 py-2 rounded-xl border border-[#2b2e40] bg-[#161826] text-xs font-semibold text-[#a1a1aa] peer-checked:border-amber-400 peer-checked:bg-amber-500/20 peer-checked:text-amber-300 transition-all">
+                  ${slot}
+                </span>
+              </label>
+            `).join('')}
+          </div>
+        </div>
+
+        <!-- Dietary Notes -->
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-[#a1a1aa] mb-1.5">Dietary & Sommelier Notes (Optional)</label>
+          <textarea id="modal-book-notes" rows="2" placeholder="e.g. Pescatarian, Truffle tasting preference, Vintage Grand Cru decanting..." class="w-full rounded-2xl border border-[#2b2e40] bg-[#161826] px-4 py-2.5 text-xs text-white placeholder-[#71717a] focus:border-amber-400 focus:outline-none resize-none"></textarea>
+        </div>
+
+        <!-- Pricing Summary & Submit -->
+        <div class="pt-2 border-t border-[#232636] flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div>
+            <span class="text-[10px] uppercase text-[#71717a] block">Degustation Estimate</span>
+            <span id="modal-total-price" class="font-display text-xl font-bold text-amber-300">$${r.pricePerPerson * 2}</span>
+            <span class="text-[10px] text-[#8c8f9f] font-normal"> ($${r.pricePerPerson}/pp)</span>
+          </div>
+
+          <div class="flex items-center gap-2 w-full sm:w-auto">
+            <button type="button" onclick="store.closeBookingModal()" class="px-4 py-3 rounded-2xl border border-[#2b2e40] text-xs font-semibold text-[#a1a1aa] hover:text-white transition-colors">Cancel</button>
+            <button type="submit" class="flex-1 sm:flex-initial flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 px-6 py-3 text-xs font-bold text-black shadow-[0_0_20px_rgba(212,175,55,0.3)] hover:brightness-110 active:scale-95 transition-all">
+              <i data-lucide="check-circle-2" class="h-4 w-4"></i>
+              <span>Confirm Reservation</span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  `;
+
+  if (window.lucide) window.lucide.createIcons();
+}
+
+function updateModalPriceDisplay() {
+  const guests = parseInt(document.getElementById('modal-book-guests').value) || 2;
+  const pricePerPerson = parseFloat(document.getElementById('modal-rest-price').value) || 250;
+  const priceEl = document.getElementById('modal-total-price');
+  if (priceEl) priceEl.textContent = `$${guests * pricePerPerson}`;
+}
+
+function handleBookingFormSubmit(e) {
+  e.preventDefault();
+  const restId = document.getElementById('modal-rest-id').value;
+  const restName = document.getElementById('modal-rest-name').value;
+  const restCity = document.getElementById('modal-rest-city').value;
+  const pricePerPerson = parseFloat(document.getElementById('modal-rest-price').value) || 250;
+  const date = document.getElementById('modal-book-date').value;
+  const guests = parseInt(document.getElementById('modal-book-guests').value) || 2;
+  const notes = document.getElementById('modal-book-notes').value;
+
+  const slotEls = document.getElementsByName('modal-slot');
+  let selectedSlot = '7:30 PM';
+  for (const el of slotEls) {
+    if (el.checked) { selectedSlot = el.value; break; }
+  }
+
+  const zoneEls = document.getElementsByName('modal-zone');
+  let selectedZone = 'Primary Salon';
+  for (const el of zoneEls) {
+    if (el.checked) { selectedZone = el.value; break; }
+  }
+
+  const reservation = store.addReservation({
+    restaurantId: restId,
+    restaurantName: restName,
+    restaurantCity: restCity,
+    date: date,
+    time: selectedSlot,
+    partySize: guests,
+    seatingZone: selectedZone,
+    pricePerPerson: pricePerPerson,
+    totalPrice: guests * pricePerPerson,
+    dietaryNotes: notes
+  });
+
+  store.closeBookingModal();
+  store.openDigitalPass(reservation);
 }

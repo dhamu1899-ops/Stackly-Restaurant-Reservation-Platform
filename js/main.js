@@ -40,9 +40,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // Render Toasts container initially
   renderToasts();
 
-  // Subscribe renderToasts to store so new toasts are shown immediately
-  if (window.store && typeof renderToasts === 'function') {
-    store.subscribe(() => renderToasts());
+  // Subscribe renderToasts & renderBookingModal to store so modal and toasts render reactively
+  if (window.store) {
+    if (typeof renderToasts === 'function') store.subscribe(() => renderToasts());
+    if (typeof renderBookingModal === 'function') store.subscribe(() => renderBookingModal());
   }
 
   // Keyboard shortcuts: Ctrl+K / Cmd+K for command search

@@ -280,14 +280,19 @@
       const email = document.getElementById('signup-email').value.trim();
       const phone = document.getElementById('signup-phone').value.trim();
       const password = document.getElementById('signup-password').value;
+      const dietary = document.getElementById('signup-dietary') ? document.getElementById('signup-dietary').value : '';
       const termsAccepted = document.getElementById('terms-checkbox').checked;
 
       if (!fullName || !email || !password) {
-        store.showToast('Form Incomplete', 'Please fill in all required membership details.', 'info');
+        store.showToast('Form Incomplete', 'Please fill in all required membership details.', 'error');
+        return;
+      }
+      if (password.length < 6) {
+        store.showToast('Weak Passcode', 'Passcode must be at least 6 characters long.', 'error');
         return;
       }
       if (!termsAccepted) {
-        store.showToast('Terms Required', 'Please accept the Stackly Reserve Private Dining charter.', 'info');
+        store.showToast('Terms Required', 'Please accept the Stackly Reserve Private Dining charter.', 'error');
         return;
       }
 
@@ -296,12 +301,24 @@
       btn.innerHTML = '<div class="flex items-center gap-2"><div class="h-4 w-4 border-2 border-black border-t-transparent rounded-full animate-spin"></div><span>Issuing Digital Pass...</span></div>';
 
       setTimeout(() => {
-        store.login(email, signupRole, fullName);
-        if (window.confetti) confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 }, colors: ['#d4af37', '#f5c518', '#fff'] });
-        store.showToast('Membership Granted!', `Welcome, ${fullName}! Your VIP dining pass has been issued.`, 'gold');
-        setTimeout(() => {
-          window.location.href = signupRole === 'admin' ? 'admin-dashboard.html' : 'client-profile.html';
-        }, 800);
+        const success = store.signup({
+          name: fullName,
+          email: email,
+          phone: phone,
+          password: password,
+          role: signupRole,
+          dietaryNotes: dietary
+        });
+
+        btn.disabled = false;
+        btn.innerHTML = '<span>Complete VIP Registration</span><i data-lucide="arrow-right" class="h-4 w-4"></i>';
+        if (window.lucide) window.lucide.createIcons();
+
+        if (success) {
+          setTimeout(() => {
+            window.location.href = signupRole === 'admin' ? 'admin-dashboard.html' : 'client-profile.html';
+          }, 600);
+        }
       }, 600);
     }
 
